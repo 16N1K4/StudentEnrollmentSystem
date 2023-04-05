@@ -1,0 +1,114 @@
+﻿@model Subject
+
+<h1>Subject Details</h1>
+@{
+    #region Schedule Generator
+    string code = Model.Section.SectionCode;
+    string day = "";
+    string startTime = "";
+    string endTime = "";
+
+    switch (code[0])
+    {
+        case 'M':
+            day = "Monday";
+            break;
+        case 'T':
+            day = "Tuesday";
+            break;
+        case 'W':
+            day = "Wednesday";
+            break;
+        case 'H':
+            day = "Thursday";
+            break;
+        case 'F':
+            day = "Friday";
+            break;
+        case 'S':
+            day = "Saturday";
+            break;
+    }
+
+    switch (code[1])
+    {
+        case 'A':
+            startTime = "07:00 AM";
+            break;
+        case 'B':
+            startTime = "08:30 AM";
+            break;
+        case 'C':
+            startTime = "10:00 AM";
+            break;
+        case 'D':
+            startTime = "11:30 AM";
+            break;
+        case 'E':
+            startTime = "1:00 PM";
+            break;
+        case 'F':
+            startTime = "2:30 PM";
+            break;
+        case 'G':
+            startTime = "4:00 PM";
+            break;
+        case 'H':
+            startTime = "5:30 PM";
+            break;
+        case 'I':
+            startTime = "7:00 PM";
+            break;
+        case 'J':
+            startTime = "8:30 PM";
+            break;
+    }
+
+    switch (code[2])
+    {
+        case 'A':
+            endTime = "07:00 AM";
+            break;
+        case 'B':
+            endTime = "08:30 AM";
+            break;
+        case 'C':
+            endTime = "10:00 AM";
+            break;
+        case 'D':
+            endTime = "11:30 AM";
+            break;
+        case 'E':
+            endTime = "1:00 PM";
+            break;
+        case 'F':
+            endTime = "2:30 PM";
+            break;
+        case 'G':
+            endTime = "4:00 PM";
+            break;
+        case 'H':
+            endTime = "5:30 PM";
+            break;
+        case 'I':
+            endTime = "7:00 PM";
+            break;
+        case 'J':
+            endTime = "8:30 PM";
+            break;
+    }
+    #endregion
+}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+            <h6 class="card-subtitle mb-2 text-muted">@Model.ID</h6>
+            <h5 class="card-text">@Model.Units</h5>
+            <h5 class="card-text">@Model.ClassSize</h5>
+            <h5 class="card-text">@Model.Faculty.FirstName @Model.Faculty.LastName</h5>
+            <h5 class="card-text">@Model.Course.Name</h5>
+            <h5 class="card-text">@Model.Section.SectionCode</h5>
+            <h5 class="card-text">@day, @startTime - @endTime</h5>
+            <a asp-controller="Enrollment" asp-action="ViewAllSubjects" class="card-link">Back to list</a>
+    </div>
+</div>

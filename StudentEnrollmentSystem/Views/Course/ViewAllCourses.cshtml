@@ -1,0 +1,63 @@
+﻿@model List<Course>
+
+
+<h3 align="center">Course List</h3>
+@if (TempData["SuccessA"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@TempData["SuccessA"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+}
+@if (TempData["SuccessB"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@TempData["SuccessB"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+}
+@if (TempData["SuccessC"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@TempData["SuccessC"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+}
+
+<a class="btn btn-success" asp-action="AddCourse" asp-controller="Course">Add Course</a>
+
+<table class="table table-striped table-info">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Department</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Crs in Model)
+        {
+            <tr>
+                <th scope="row">@Crs.ID</th>
+                <td>@Crs.Name</td>
+                <td>@Crs.Department.Name</td>
+                <td><a class="btn btn-primary" asp-controller="Course" asp-action="ViewOneCourse" asp-route-id="@Crs.ID">View</a></td>
+                <td><a class="btn btn-warning" asp-controller="Course" asp-action="UpdateCourse" asp-route-id="@Crs.ID">Edit</a></td>
+                <td><a class="btn btn-danger" asp-controller="Course" asp-action="DeleteCourse" asp-route-id="@Crs.ID">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+

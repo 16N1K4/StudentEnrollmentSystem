@@ -1,0 +1,12 @@
+﻿@model Course
+
+<h1>Course Details</h1>
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <h6 class="card-subtitle mb-2 text-muted">@Model.ID</h6>
+        <h5 class="card-text">@Model.Department.Name</h5>
+        <a asp-controller="Course" asp-action="ViewAllCourses" class="card-link">Back to list</a>
+    </div>
+</div>

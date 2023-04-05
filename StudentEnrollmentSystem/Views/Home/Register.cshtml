@@ -1,0 +1,33 @@
+﻿@using StudentEnrollmentSystem.ViewModels
+@model RegisterViewModel
+
+<h1>Register User</h1>
+
+<form asp-controller="Home" asp-action="Register" method="post">
+    <div asp-validation-summary="All" class="text-danger">
+    </div>
+    <div>
+        <label asp-for="FirstName">First Name</label>
+        <input asp-for="FirstName" />
+    </div>
+    <div>
+        <label asp-for="LastName">Last Name</label>
+        <input asp-for="LastName" />
+    </div>
+    <div>
+        <label asp-for="Email">Email Address (will serve as your username)</label>
+        <input asp-for="Email" />
+    </div>
+    <label class="form-label" asp-for="CourseID">Course</label>
+    @Html.DropDownListFor(x => x.CourseID, new SelectList(ViewBag.Courses, "ID", "Name"), new {@class = "form-control"})
+    <span asp-validation-for="CourseID" class="text-danger"></span>
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+    </div>
+    <div>
+        <label asp-for="ConfirmPassword">Confirm Password</label>
+        <input asp-for="ConfirmPassword" />
+    </div>
+    <button type="submit">Register</button>
+</form>

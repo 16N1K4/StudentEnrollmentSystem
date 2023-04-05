@@ -1,0 +1,36 @@
+﻿@model Subject
+
+<h3 align="center"> Create Subject</h3>
+
+<form method="post" asp-action="AddSubject" asp-controller="Subject">
+
+    <div class="mb-3">
+        <label class="form-label" asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="Units"></label>
+        <input type = "number" class="form-control" asp-for="Units" />
+        <span asp-validation-for="Units" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="ClassSize">Class Size</label>
+        <input type="number" class="form-control" asp-for="ClassSize" />
+        <span asp-validation-for="ClassSize" class="text-danger"></span>
+    </div>
+    
+    <label class="form-label" asp-for="FacultyID">Instructor</label>
+    @Html.DropDownListFor(x => x.FacultyID, new SelectList(ViewBag.Faculty, "ID", "FullName"), new {@class = "form-control"})
+    <span asp-validation-for="FacultyID" class="text-danger"></span>
+
+    <label class="form-label" asp-for="CourseID">Course</label>
+    @Html.DropDownListFor(x => x.CourseID, new SelectList(ViewBag.Courses, "ID", "Name"), new {@class = "form-control"})
+    <span asp-validation-for="CourseID" class="text-danger"></span>
+
+    <label class="form-label" asp-for="SectionID">Section</label>
+    @Html.DropDownListFor(x => x.SectionID, new SelectList(ViewBag.Sections, "ID", "SectionCode"), new {@class = "form-control"})
+    <span asp-validation-for="SectionID" class="text-danger"></span>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
