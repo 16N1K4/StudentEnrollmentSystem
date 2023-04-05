@@ -28,28 +28,21 @@ namespace StudentEnrollmentSystem.Controllers
             _repo = repo;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         [HttpGet]
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
-            if (_userManager.Users.FirstOrDefault(u => u.UserName == "superuser@ses.com") == null) {
-                var user = new ApplicationUser
+            if (_signInManager.IsSignedIn(User))
+            {
+                if (User.IsInRole("Administrator"))
                 {
-                    FirstName = "Super",
-                    LastName = "User",
-                    Email = "superuser@ses.com",
-                    UserName = "superuser@ses.com",
-                    CourseID = -1
-                };
+                    return RedirectToAction("ViewAllFaculty", "Faculty");
+                }
 
-                string password = "Password_1";
 
-                var result = await _userManager.CreateAsync(user, password);
-                var roleResult = await _userManager.AddToRoleAsync(user, "Administrator");
+                if (User.IsInRole("Student"))
+                {
+                    return RedirectToAction("ViewSchedule", "Enrollment");
+                }
             }
 
             return View();
@@ -60,20 +53,12 @@ namespace StudentEnrollmentSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(ReturningUser.UserName, ReturningUser.Password, ReturningUser.RememberMe, false);
+                var result = await _signInManager.PasswordSignInAsync(ReturningUser.UserName, ReturningUser.Password, false, false);
                 if (result.Succeeded)
                 {
-                    if (User.IsInRole("Administrator"))
-                    {
-                        return RedirectToAction("ViewAllFaculty", "Faculty");
-                    }
-                    
-
-                    if(User.IsInRole("Student"))
-                    {
-                        return RedirectToAction("ViewAllSubjects", "Enrollment");
-                    }
+                    return RedirectToAction("Login");
                 }
+
                 ModelState.AddModelError(string.Empty, "Invalid login credentials");
             }
             return View();
@@ -137,6 +122,34 @@ namespace StudentEnrollmentSystem.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login");
+        }
+
+        public async Task<IActionResult> Initialize()
+        {
+            if (_userManager.Users.FirstOrDefault(u => u.UserName == "superuser@ses.com") == null)
+            {
+                var user = new ApplicationUser
+                {
+                    FirstName = "Super",
+                    LastName = "User",
+                    Email = "superuser@ses.com",
+                    UserName = "superuser@ses.com",
+                    CourseID = -1
+                };
+
+                string password = "Password_1";
+
+                var result = await _userManager.CreateAsync(user, password);
+                var roleResult = await _userManager.AddToRoleAsync(user, "Administrator");
+
+                ViewData["Initialize"] = "Default admin account created.";
+            }
+            else
+            {
+                ViewData["Initialize"] = "Default admin already exists.";
+            }
+
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
