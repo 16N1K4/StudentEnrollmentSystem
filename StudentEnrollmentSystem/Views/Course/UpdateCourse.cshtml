@@ -2,20 +2,24 @@
 
 <h3 align="center"> Update Course</h3>
 
+<div id="form">
 <form method="post" asp-action="UpdateCourse" asp-controller="Course">
 
-    <div class="mb-3">
+    <div class="form-group col-md-12">
         <label class="form-label" asp-for="ID"></label>
         <input class="form-control" asp-for="ID" readonly />
     </div>
-    <div class="mb-3">
+    <div class ="form-group col-md-12">
         <label class="form-label" asp-for="Name"></label>
         <input class="form-control" asp-for="Name" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-    <label class="form-label" asp-for="DeptID">Department</label>
-    @Html.DropDownListFor(x => x.DeptID, new SelectList(ViewBag.Departments, "ID", "Name"), new {@class = "form-control"})
-    <span asp-validation-for="DeptID" class="text-danger"></span>
-
+    <div class="form-group col-md-12">
+        <label class="form-label" asp-for="DeptID">Department</label>
+        @Html.DropDownListFor(x => x.DeptID, new SelectList(ViewBag.Departments, "ID", "Name"), new {@class = "form-control"})
+        <span asp-validation-for="DeptID" class="text-danger"></span>
+    </div>
+    <br />
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>

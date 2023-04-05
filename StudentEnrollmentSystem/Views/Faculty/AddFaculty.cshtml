@@ -2,28 +2,32 @@
 
 <h3 align="center"> Create Faculty</h3>
 
+<div id="form">
 <form method="post" asp-action="AddFaculty" asp-controller="Faculty">
 
-    <div class="mb-3">
+    <div class="form-group col-md-12">
         <label class="form-label" asp-for="FirstName">First Name</label>
         <input class="form-control" asp-for="FirstName" />
         <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
+    <div class="form-group col-md-12">
         <label class="form-label" asp-for="LastName">Last Name</label>
         <input class="form-control" asp-for="LastName" />
         <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
-    <div class="mb-3">
+    <div class="form-group col-md-12">
         <label class="form-label" asp-for="Email">Email Address</label>
         <input type="email" class="form-control" asp-for="Email" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
-    <label class="form-label" asp-for="DeptID">Department</label>
-    @Html.DropDownListFor(x => x.DeptID, new SelectList(ViewBag.Departments, "ID", "Name"), new {@class = "form-control"})
-    <span asp-validation-for="DeptID" class="text-danger"></span>
-
+    <div class="form-group col-md-12">
+        <label class="form-label" asp-for="DeptID">Department</label>
+        @Html.DropDownListFor(x => x.DeptID, new SelectList(ViewBag.Departments, "ID", "Name"), new {@class = "form-control"})
+        <span asp-validation-for="DeptID" class="text-danger"></span>
+    </div>
+    <br />
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>
 

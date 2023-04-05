@@ -51,7 +51,7 @@
                         @if (_signInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout @User.Identity.Name </a>
+                                <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="Logout">Logout @User.Identity.Name </a>
                             </li>
                         }
                         else
@@ -60,7 +60,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                                <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
                             </li>
                         }
                     </ul>

@@ -2,17 +2,19 @@
 
 <h3 align="center"> Update Department</h3>
 
+<div id="form">
 <form method="post" asp-action="UpdateDepartment" asp-controller="Department">
 
-    <div class="mb-3">
+    <div class="form-group col-md-12">
         <label class="form-label" asp-for="ID"></label>
         <input class="form-control" asp-for="ID" readonly />
     </div>
-    <div class="mb-3">
+    <div class="form-group col-md-12">
         <label class="form-label" asp-for="Name"></label>
         <input class="form-control" asp-for="Name" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-
+    <br />
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>
