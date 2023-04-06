@@ -16,6 +16,7 @@ builder.Services.AddScoped<ICourseRepo, CourseRepo>();
 builder.Services.AddScoped<IFacultyRepo, FacultyRepo>();
 builder.Services.AddScoped<ISubjectRepo, SubjectRepo>();
 builder.Services.AddScoped<IEnrollmentRepo, EnrollmentRepo>();
+builder.Services.AddScoped<IAccountRepo, AccountRepo>();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<SESContext>();

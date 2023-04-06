@@ -65,59 +65,6 @@ namespace StudentEnrollmentSystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult Register()
-        {
-            var CourseList = _repo.ViewAllCourses();
-            ViewBag.Courses = CourseList;
-
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel NewUser)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser
-                {
-                    FirstName = NewUser.FirstName,
-                    LastName = NewUser.LastName,
-                    Email = NewUser.Email,
-                    UserName = NewUser.Email,
-                    CourseID = NewUser.CourseID
-                };
-
-                var result = await _userManager.CreateAsync(user, NewUser.Password);
-
-                if (result.Succeeded)
-                {
-                    bool roleExists = await _roleManager.RoleExistsAsync("Student");
-                    if(roleExists)
-                    {
-                        var roleResult = await _userManager.AddToRoleAsync(user, "Student");
-
-                        if (!roleResult.Succeeded)
-                        {
-                            ModelState.AddModelError(String.Empty, "User Role cannot be assigned");
-                        }
-
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return RedirectToAction("Index");
-                    }
-                    
-                    
-                }
-
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
-            }
-
-            return View(NewUser);
-        }
-
-        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

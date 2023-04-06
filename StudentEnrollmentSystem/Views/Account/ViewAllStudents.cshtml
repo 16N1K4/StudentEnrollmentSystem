@@ -1,0 +1,63 @@
+﻿@model List<ApplicationUser>
+
+<h3 align="center">Student User Accounts List</h3>
+@if (TempData["SuccessA"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@TempData["SuccessA"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+}
+@if (TempData["SuccessB"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@TempData["SuccessB"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+}
+@if (TempData["SuccessC"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@TempData["SuccessC"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+}
+
+<a class="btn btn-success" asp-action="Register" asp-controller="Account">Register New Account</a>
+
+<table class="table table-striped table-info" id="data">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email Address</th>
+            <th scope="col">Course</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var std in Model)
+        {
+            <tr>
+                <th scope="row">@std.Id</th>
+                <td>@std.FirstName @std.LastName</td>
+                <td>@std.Email</td>
+                <td>@std.Course.Name</td>
+                <td><a class="btn btn-primary" asp-controller="Account" asp-action="ViewOneStudent" asp-route-id="@std.Id">View</a></td>
+                <td><a class="btn btn-warning" asp-controller="Account" asp-action="UpdateStudent" asp-route-id="@std.Id">Edit</a></td>
+                <td><a class="btn btn-danger" asp-controller="Account" asp-action="DeleteStudent" asp-route-id="@std.Id">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
