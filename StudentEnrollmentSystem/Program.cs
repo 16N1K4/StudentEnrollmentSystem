@@ -19,7 +19,11 @@ builder.Services.AddScoped<IEnrollmentRepo, EnrollmentRepo>();
 builder.Services.AddScoped<IAccountRepo, AccountRepo>();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<SESContext>();
+    .AddEntityFrameworkStores<SESContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
+   opt.TokenLifespan = TimeSpan.FromHours(2));
 
 var app = builder.Build();
 

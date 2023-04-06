@@ -54,9 +54,14 @@
                     <ul class="nav navbar-nav my-2 my-lg-0">
                         @if (_signInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item">
-                                <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="Logout">Logout @User.Identity.Name </a>
-                            </li>
+                            <div class="btn-group" role="group">
+                                <li class="nav-item">
+                                    <a class="btn btn-info" asp-area="" asp-controller="Home" asp-action="ChangePassword">Change Password</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="Logout">Logout @User.Identity.Name </a>
+                                </li>
+                            </div>
                         }
                         else
                         {
