@@ -1,0 +1,44 @@
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using StudentEnrollmentAPI.Models;
+
+namespace StudentEnrollmentAPI.Data
+{
+    public class SESContext : IdentityDbContext<ApplicationUser>
+    {
+        public IConfiguration _config { get; }
+
+        public SESContext(IConfiguration config)
+        {
+            _config = config;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder builder)
+        {
+            var server = _config.GetConnectionString("Server");
+            var DB = _config.GetConnectionString("DB");
+            var username = _config.GetConnectionString("UserName");
+            var password = _config.GetConnectionString("Password");
+
+            string ConnectionString = $"Server={server};Database={DB};User Id={username};Password={password};MultipleActiveResultSets=true;Integrated Security=true";
+
+            builder.UseSqlServer(ConnectionString).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
+            base.OnConfiguring(builder);
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<StudentSubject>().HasKey(stdsub => new { stdsub.StudentID, stdsub.SubjectID });
+            builder.ConfigureRelationships();
+            base.OnModelCreating(builder);
+        }
+
+        public DbSet<StudentSubject> StudentSubjects { get; set; }
+        public DbSet<Faculty> Faculties { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Section> Sections { get; set; }
+    }
+}
