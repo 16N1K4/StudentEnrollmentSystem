@@ -30,6 +30,9 @@ namespace StudentEnrollmentAPI.Controllers
                         Units = Subject.Units,
                         ClassSize = Subject.ClassSize,
                         SectionCode = Subject.Section.SectionCode,
+                        ScheduleDay = _repo.ScheduleDay(Subject.Section.SectionCode[0]),
+                        StartTime = _repo.StartTime(Subject.Section.SectionCode[1]),
+                        EndTime = _repo.EndTime(Subject.Section.SectionCode[2]),
                         CourseName = Subject.Course.Name,
                         FacultyName = Subject.Faculty.FullName
                     }
@@ -54,6 +57,9 @@ namespace StudentEnrollmentAPI.Controllers
                         Units = Subject.Units,
                         ClassSize = Subject.ClassSize,
                         SectionCode = Subject.Section.SectionCode,
+                        ScheduleDay = _repo.ScheduleDay(Subject.Section.SectionCode[0]),
+                        StartTime = _repo.StartTime(Subject.Section.SectionCode[1]),
+                        EndTime = _repo.EndTime(Subject.Section.SectionCode[2]),
                         CourseName = Subject.Course.Name,
                         FacultyName = Subject.Faculty.FullName
                     }
@@ -77,6 +83,9 @@ namespace StudentEnrollmentAPI.Controllers
                         Units = Subject.Units,
                         ClassSize = Subject.ClassSize,
                         SectionCode = Subject.Section.SectionCode,
+                        ScheduleDay = _repo.ScheduleDay(Subject.Section.SectionCode[0]),
+                        StartTime = _repo.StartTime(Subject.Section.SectionCode[1]),
+                        EndTime = _repo.EndTime(Subject.Section.SectionCode[2]),
                         CourseName = Subject.Course.Name,
                         FacultyName = Subject.Faculty.FullName
                     }
@@ -96,6 +105,9 @@ namespace StudentEnrollmentAPI.Controllers
                 Units = Subject.Units,
                 ClassSize = Subject.ClassSize,
                 SectionCode = Subject.Section.SectionCode,
+                ScheduleDay = _repo.ScheduleDay(Subject.Section.SectionCode[0]),
+                StartTime = _repo.StartTime(Subject.Section.SectionCode[1]),
+                EndTime = _repo.EndTime(Subject.Section.SectionCode[2]),
                 CourseName = Subject.Course.Name,
                 FacultyName = Subject.Faculty.FullName
             };

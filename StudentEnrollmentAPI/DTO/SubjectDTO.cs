@@ -18,6 +18,9 @@ namespace StudentEnrollmentAPI.DTO
         public int ClassSize { get; set; }
 
         public string SectionCode { get; set; }
+        public string ScheduleDay { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
 
         public string FacultyName { get; set; }
         public string CourseName { get; set; }
