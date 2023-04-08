@@ -1,7 +1,7 @@
 ﻿@model Faculty
 
 <h3 align="center"> Create Faculty</h3>
-
+<a asp-controller="Faculty" asp-action="ViewAllFaculty" class="card-link">Back to list</a>
 <div id="form">
 <form method="post" asp-action="AddFaculty" asp-controller="Faculty">
 
@@ -27,7 +27,7 @@
         <span asp-validation-for="DeptID" class="text-danger"></span>
     </div>
     <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Submit</button>
 </form>
 </div>
 

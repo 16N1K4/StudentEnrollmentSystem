@@ -34,8 +34,8 @@
 
 }
 
-<a class="btn btn-success" asp-action="AddSubject" asp-controller="Subject">Add Subject</a>
-
+<a class="btn btn-success" asp-action="AddSubject" asp-controller="Subject"><i class="bi bi-plus-circle"></i> Add Subject</a>
+<br />
 <table class="table table-striped table-info" id="data">
     <thead class="thead-dark">
         <tr>
@@ -160,9 +160,9 @@
                 <td>@Sub.Course.Name</td>
                 <td>@code</td>
                 <td>@day, @startTime - @endTime</td>
-                <td><a class="btn btn-primary" asp-controller="Subject" asp-action="ViewOneSubject" asp-route-id="@Sub.ID">View</a></td>
-                <td><a class="btn btn-warning" asp-controller="Subject" asp-action="UpdateSubject" asp-route-id="@Sub.ID">Edit</a></td>
-                <td><a class="btn btn-danger" asp-controller="Subject" asp-action="DeleteSubject" asp-route-id="@Sub.ID">Delete</a></td>
+                <td><a class="btn btn-primary" asp-controller="Subject" asp-action="ViewOneSubject" asp-route-id="@Sub.ID"><i class="bi bi-eye"></i> View</a></td>
+                <td><a class="btn btn-warning" asp-controller="Subject" asp-action="UpdateSubject" asp-route-id="@Sub.ID"><i class="bi bi-pencil-square"></i> Edit</a></td>
+                <td><a class="btn btn-danger" asp-controller="Subject" asp-action="DeleteSubject" asp-route-id="@Sub.ID"><i class="bi bi-trash"></i> Delete</a></td>
             </tr>
         }
     </tbody>

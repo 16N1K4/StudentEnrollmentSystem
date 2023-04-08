@@ -2,7 +2,7 @@
 @model RegisterViewModel
 
 <h3 align="center">Update Student Details</h3>
-
+<a asp-controller="Account" asp-action="ViewAllStudents" class="card-link">Back to list</a>
 <div id="form">
     <form asp-controller="Account" asp-action="UpdateStudent" method="post">
         <div asp-validation-summary="All" class="text-danger">
@@ -26,6 +26,6 @@
         </div>
 
         <br />
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit"><i class="bi bi-pencil-square"></i> Submit</button>
     </form>
 </div>

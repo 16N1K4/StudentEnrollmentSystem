@@ -1,7 +1,7 @@
 ﻿@model Department
 
 <h3 align="center"> Create Department</h3>
-
+<a asp-controller="Department" asp-action="ViewAllDepartments" class="card-link">Back to list</a>
 <div id="form">
 <form method="post" asp-action="AddDepartment" asp-controller="Department">
 
@@ -11,6 +11,6 @@
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Submit</button>
 </form>
 </div>

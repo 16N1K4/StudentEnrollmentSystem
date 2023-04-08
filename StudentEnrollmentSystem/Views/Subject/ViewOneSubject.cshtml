@@ -1,7 +1,9 @@
 ﻿@model Subject
 
-<a asp-controller="Subject" asp-action="ViewAllSubjects" class="card-link">Back to list</a>
+
 <h3 align ="center">Subject Details</h3>
+<a class="btn btn-info" asp-controller="Subject" asp-action="ViewAllSubjects" class="card-link"><i class="bi bi-box-arrow-left"></i> Back to list</a>
+<br />
 @{
 #region Schedule Generator
             string code = Model.Section.SectionCode;

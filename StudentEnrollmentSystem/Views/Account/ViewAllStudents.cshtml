@@ -32,8 +32,8 @@
 
 }
 
-<a class="btn btn-success" asp-action="Register" asp-controller="Account">Register New Account</a>
-
+<a class="btn btn-success" asp-action="Register" asp-controller="Account"><i class="bi bi-plus-circle"></i> Register New Account</a>
+<br />
 <table class="table table-striped table-info" id="data">
     <thead class="thead-dark">
         <tr>
@@ -54,9 +54,9 @@
                 <td>@std.FirstName @std.LastName</td>
                 <td>@std.Email</td>
                 <td>@std.Course.Name</td>
-                <td><a class="btn btn-primary" asp-controller="Account" asp-action="ViewOneStudent" asp-route-id="@std.Id">View</a></td>
-                <td><a class="btn btn-warning" asp-controller="Account" asp-action="UpdateStudent" asp-route-id="@std.Id">Edit</a></td>
-                <td><a class="btn btn-danger" asp-controller="Account" asp-action="DeleteStudent" asp-route-id="@std.Id">Delete</a></td>
+                <td><a class="btn btn-primary" asp-controller="Account" asp-action="ViewOneStudent" asp-route-id="@std.Id"><i class="bi bi-eye"></i> View</a></td>
+                <td><a class="btn btn-warning" asp-controller="Account" asp-action="UpdateStudent" asp-route-id="@std.Id"><i class="bi bi-pencil-square"></i> Edit</a></td>
+                <td><a class="btn btn-danger" asp-controller="Account" asp-action="DeleteStudent" asp-route-id="@std.Id"><i class="bi bi-trash"></i> Delete</a></td>
             </tr>
         }
     </tbody>

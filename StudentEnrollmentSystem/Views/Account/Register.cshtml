@@ -2,7 +2,7 @@
 @model RegisterViewModel
 
 <h3 align = "center">Create New Student User</h3>
-
+<a asp-controller="Account" asp-action="ViewAllStudents" class="card-link">Back to list</a>
 <div id="form">
 <form asp-controller="Account" asp-action="Register" method="post">
     <div asp-validation-summary="All" class="text-danger">
@@ -26,6 +26,6 @@
     </div>
 
     <br />
-    <button class="btn btn-primary" type="submit">Register</button>
+        <button class="btn btn-primary" type="submit"><i class="bi bi-plus-circle"></i> Register</button>
 </form>
 </div>

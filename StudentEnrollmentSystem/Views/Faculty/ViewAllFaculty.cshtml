@@ -34,8 +34,8 @@
 
 }
 
-<a class="btn btn-success" asp-action="AddFaculty" asp-controller="Faculty">Add Faculty</a>
-
+<a class="btn btn-success" asp-action="AddFaculty" asp-controller="Faculty"><i class="bi bi-plus-circle"></i> Add Faculty</a>
+<br />
 <table class="table table-striped table-info" id="data">
     <thead class="thead-dark">
         <tr>
@@ -56,9 +56,9 @@
                 <td>@Fac.FirstName @Fac.LastName</td>
                 <td>@Fac.Email</td>
                 <td>@Fac.Department.Name</td>
-                <td><a class="btn btn-primary" asp-controller="Faculty" asp-action="ViewOneFaculty" asp-route-id="@Fac.ID">View</a></td>
-                <td><a class="btn btn-warning" asp-controller="Faculty" asp-action="UpdateFaculty" asp-route-id="@Fac.ID">Edit</a></td>
-                <td><a class="btn btn-danger" asp-controller="Faculty" asp-action="DeleteFaculty" asp-route-id="@Fac.ID">Delete</a></td>
+                <td><a class="btn btn-primary" asp-controller="Faculty" asp-action="ViewOneFaculty" asp-route-id="@Fac.ID"><i class="bi bi-eye"></i> View</a></td>
+                <td><a class="btn btn-warning" asp-controller="Faculty" asp-action="UpdateFaculty" asp-route-id="@Fac.ID"><i class="bi bi-pencil-square"></i> Edit</a></td>
+                <td><a class="btn btn-danger" asp-controller="Faculty" asp-action="DeleteFaculty" asp-route-id="@Fac.ID"><i class="bi bi-trash"></i> Delete</a></td>
             </tr>
         }
     </tbody>

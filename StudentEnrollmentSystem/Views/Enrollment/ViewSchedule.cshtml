@@ -148,8 +148,8 @@
                 <td>@Sub.Subject.Course.Name</td>
                 <td>@code</td>
                 <td>@day, @startTime - @endTime</td>
-                <td><a class="btn btn-primary" asp-controller="Enrollment" asp-action="ViewOneSubject" asp-route-id="@Sub.Subject.ID">View</a></td>
-                <td><a class="btn btn-danger" asp-controller="Enrollment" asp-action="DropSubject" asp-route-studentID="@ViewBag.StudentID" asp-route-subjectID="@Sub.Subject.ID">Drop Class</a></td>
+                <td><a class="btn btn-primary" asp-controller="Enrollment" asp-action="ViewOneSubject" asp-route-id="@Sub.Subject.ID"><i class="bi bi-eye"></i> View</a></td>
+                <td><a class="btn btn-danger" asp-controller="Enrollment" asp-action="DropSubject" asp-route-studentID="@ViewBag.StudentID" asp-route-subjectID="@Sub.Subject.ID"><i class="bi bi-trash"></i> Drop Class</a></td>
             </tr>
         }
     </tbody>
