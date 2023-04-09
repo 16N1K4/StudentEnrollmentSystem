@@ -74,7 +74,8 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<SESContext>();
+    .AddEntityFrameworkStores<SESContext>()
+    .AddDefaultTokenProviders();
 
 var app = builder.Build();
 
@@ -85,6 +86,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

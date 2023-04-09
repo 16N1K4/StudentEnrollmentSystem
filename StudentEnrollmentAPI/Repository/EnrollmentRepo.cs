@@ -4,6 +4,7 @@ using StudentEnrollmentAPI.Data;
 using StudentEnrollmentAPI.DTO;
 using StudentEnrollmentAPI.IRepository;
 using StudentEnrollmentAPI.Models;
+using System.Security.Claims;
 
 namespace StudentEnrollmentAPI.Repository
 {
