@@ -8,8 +8,8 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["StudentEnrollmentSystem.csproj", "StudentEnrollmentSystem/"]
 RUN dotnet restore "StudentEnrollmentSystem/StudentEnrollmentSystem.csproj"
-COPY . .
 WORKDIR "/src/StudentEnrollmentSystem"
+COPY . .
 RUN dotnet build "StudentEnrollmentSystem.csproj" -c Release -o /app/build
 
 FROM build AS publish
