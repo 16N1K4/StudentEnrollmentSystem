@@ -1,0 +1,149 @@
+# Student Enrollment System - Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: studentenrollment
+
+# Student Enrollment System - SQL Server
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: studentenrollmentsql
+  namespace: studentenrollment
+spec:
+  selector:
+    matchLabels:
+      app: studentenrollmentsql
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: studentenrollmentsql
+    spec:
+      containers:
+        - name: studentenrollmentsql
+          image: mcr.microsoft.com/mssql/server:2022-latest
+          ports:
+            - containerPort: 1433
+          env:
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: MSSQL_SA_PASSWORD
+              value: "P@ssw0rd123"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: studentenrollmentsql
+  namespace: studentenrollment
+  labels:
+    app: studentenrollmentsql
+spec:
+  ports:
+    - name: tcp
+      port: 1433
+      targetPort: 1433
+  selector:
+    app: studentenrollmentsql
+  type: ClusterIP
+
+# Student Enrollment API
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: studentenrollmentapi
+  namespace: studentenrollment
+spec:
+  selector:
+    matchLabels:
+      app: studentenrollmentapi
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: studentenrollmentapi
+    spec:
+      containers:
+        - name: studentenrollmentapi
+          image: 16n1k4/studentenrollmentapi:v2
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: ConnectionStrings__Server
+              value: "studentenrollmentsql"
+            - name: ConnectionStrings__Database
+              value: "SES_DB"
+            - name: ConnectionStrings__UserId
+              value: "sa"
+            - name: ConnectionStrings__Password
+              value: "P@ssw0rd123"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: studentenrollmentapi
+  namespace: studentenrollment
+  labels:
+    app: studentenrollmentapi
+spec:
+  ports:
+    - name: tcp
+      port: 5010
+      targetPort: 80
+  selector:
+    app: studentenrollmentapi
+  type: NodePort
+
+# Student Enrollment MVC Application
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: studentenrollmentsystem
+  namespace: studentenrollment
+spec:
+  selector:
+    matchLabels:
+      app: studentenrollmentsystem
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: studentenrollmentsystem
+    spec:
+      containers:
+        - name: studentenrollmentsystem
+          image: 16n1k4/studentenrollmentsystem:v3
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: ConnectionStrings__Server
+              value: "studentenrollmentsql"
+            - name: ConnectionStrings__Database
+              value: "SES_DB"
+            - name: ConnectionStrings__UserId
+              value: "sa"
+            - name: ConnectionStrings__Password
+              value: "P@ssw0rd123"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: studentenrollmentsystem
+  namespace: studentenrollment
+  labels:
+    app: studentenrollmentsystem
+spec:
+  ports:
+    - name: tcp
+      port: 5124
+      targetPort: 80
+  selector:
+    app: studentenrollmentsystem
+  type: NodePort
