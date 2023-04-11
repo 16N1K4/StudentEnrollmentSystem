@@ -89,14 +89,9 @@ namespace StudentEnrollmentSystem.Controllers
                 var result = await _userManager.CreateAsync(user, password);
                 var roleResult = await _userManager.AddToRoleAsync(user, "Administrator");
 
-                ViewData["Initialize"] = "Default admin account created.";
-            }
-            else
-            {
-                ViewData["Initialize"] = "Default admin already exists.";
             }
 
-            return View();
+            return RedirectToAction("Login");
         }
 
         [HttpGet]
