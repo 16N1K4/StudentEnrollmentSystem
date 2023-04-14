@@ -7,7 +7,7 @@ using StudentEnrollmentSystem.Repository;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddDataAnnotationsLocalization();
 
 builder.Services.AddDbContext<SESContext>();
 builder.Services.AddScoped<SESContext, SESContext>();
