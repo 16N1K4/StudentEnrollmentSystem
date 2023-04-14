@@ -46,12 +46,6 @@ namespace StudentEnrollmentSystem.Controllers
 
         public IActionResult EnrollSubject(string StudentID, int SubjectID)
         {
-            if (_repo.ScheduleConflict(StudentID, SubjectID))
-            {
-                TempData["FailA"] = "The class you're trying to add has a schedule conflict with a class you've already added.";
-                return RedirectToAction("ViewAllSubjects");
-            }
-
             try
             {
                 _repo.EnrollSubject(StudentID, SubjectID);
@@ -62,6 +56,11 @@ namespace StudentEnrollmentSystem.Controllers
             catch(Exception e)
             {
                 TempData["FailB"] = "You've already added that class to your schedule.";
+                return RedirectToAction("ViewAllSubjects");
+            }
+            if (_repo.ScheduleConflict(StudentID, SubjectID))
+            {
+                TempData["FailA"] = "The class you're trying to add has a schedule conflict with a class you've already added.";
                 return RedirectToAction("ViewAllSubjects");
             }
         }
