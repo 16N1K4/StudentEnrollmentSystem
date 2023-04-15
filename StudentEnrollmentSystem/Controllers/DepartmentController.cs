@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentEnrollmentSystem.IRepository;
 using StudentEnrollmentSystem.Models;
@@ -10,20 +11,32 @@ namespace StudentEnrollmentSystem.Controllers
     public class DepartmentController : Controller
     {
         IDepartmentRepo _repo;
+        private SignInManager<ApplicationUser> _signInManager { get; }
 
-        public DepartmentController(IDepartmentRepo repo)
+        public DepartmentController(IDepartmentRepo repo, SignInManager<ApplicationUser> signInManager)
         {
             _repo = repo;
+            _signInManager = signInManager;
         }
 
         public IActionResult ViewAllDepartments()
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                TempData["Unauthorized"] = "You must be logged in to access this page.";
+                return RedirectToAction("Login", "Home");
+            }
             var DeptList = _repo.ViewAllDepartments();
             return View(DeptList);
         }
 
         public IActionResult ViewOneDepartment(int id)
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                TempData["Unauthorized"] = "You must be logged in to access this page.";
+                return RedirectToAction("Login", "Home");
+            }
             var Dept = _repo.ViewOneDepartment(id);
             return View(Dept);
         }
@@ -31,6 +44,11 @@ namespace StudentEnrollmentSystem.Controllers
         [HttpGet]
         public IActionResult AddDepartment()
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                TempData["Unauthorized"] = "You must be logged in to access this page.";
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
 
@@ -50,6 +68,11 @@ namespace StudentEnrollmentSystem.Controllers
         [HttpGet]
         public IActionResult UpdateDepartment(int id)
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                TempData["Unauthorized"] = "You must be logged in to access this page.";
+                return RedirectToAction("Login", "Home");
+            }
             var Dept = _repo.ViewOneDepartment(id);
             return View(Dept);
         }

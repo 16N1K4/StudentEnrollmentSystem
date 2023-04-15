@@ -12,15 +12,22 @@ namespace StudentEnrollmentSystem.Controllers
     {
         IEnrollmentRepo _repo;
         UserManager<ApplicationUser> _userManager;
+        private SignInManager<ApplicationUser> _signInManager { get; }
 
-        public EnrollmentController(IEnrollmentRepo repo, UserManager<ApplicationUser> userManager)
+        public EnrollmentController(IEnrollmentRepo repo, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _repo = repo;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult ViewAllSubjects()
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                TempData["Unauthorized"] = "You must be logged in to access this page.";
+                return RedirectToAction("Login", "Home");
+            }
             var SubjectList = _repo.ViewAllSubjects();
             var StudentID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             ViewBag.StudentID = StudentID;
@@ -30,6 +37,11 @@ namespace StudentEnrollmentSystem.Controllers
 
         public IActionResult ViewOneSubject(int id)
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                TempData["Unauthorized"] = "You must be logged in to access this page.";
+                return RedirectToAction("Login", "Home");
+            }
             var Subject = _repo.ViewOneSubject(id);
 
             return View(Subject);
@@ -37,6 +49,11 @@ namespace StudentEnrollmentSystem.Controllers
 
         public IActionResult ViewSchedule(string id)
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                TempData["Unauthorized"] = "You must be logged in to access this page.";
+                return RedirectToAction("Login", "Home");
+            }
             var StudentID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var Schedule = _repo.ViewSchedule(StudentID);
             ViewBag.StudentID = StudentID;

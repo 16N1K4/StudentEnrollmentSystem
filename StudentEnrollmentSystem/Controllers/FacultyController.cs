@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentEnrollmentSystem.IRepository;
 using StudentEnrollmentSystem.Models;
@@ -10,20 +11,32 @@ namespace StudentEnrollmentSystem.Controllers
     public class FacultyController : Controller
     {
         IFacultyRepo _repo;
+        private SignInManager<ApplicationUser> _signInManager { get; }
 
-        public FacultyController(IFacultyRepo repo)
+        public FacultyController(IFacultyRepo repo, SignInManager<ApplicationUser> signInManager)
         {
             _repo = repo;
+            _signInManager = signInManager;
         }
 
         public IActionResult ViewAllFaculty()
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                TempData["Unauthorized"] = "You must be logged in to access this page.";
+                return RedirectToAction("Login", "Home");
+            }
             var FacultyList = _repo.ViewAllFaculty();
             return View(FacultyList);
         }
 
         public IActionResult ViewOneFaculty(int id)
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                TempData["Unauthorized"] = "You must be logged in to access this page.";
+                return RedirectToAction("Login", "Home");
+            }
             var Faculty = _repo.ViewOneFaculty(id);
             return View(Faculty);
         }
@@ -31,6 +44,11 @@ namespace StudentEnrollmentSystem.Controllers
         [HttpGet]
         public IActionResult AddFaculty()
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                TempData["Unauthorized"] = "You must be logged in to access this page.";
+                return RedirectToAction("Login", "Home");
+            }
             var DeptList = _repo.FetchDepartmentList();
             ViewBag.Departments = DeptList;
 
@@ -54,6 +72,11 @@ namespace StudentEnrollmentSystem.Controllers
         [HttpGet]
         public IActionResult UpdateFaculty(int id)
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                TempData["Unauthorized"] = "You must be logged in to access this page.";
+                return RedirectToAction("Login", "Home");
+            }
             var Faculty = _repo.ViewOneFaculty(id);
             var DeptList = _repo.FetchDepartmentList();
             ViewBag.Departments = DeptList;

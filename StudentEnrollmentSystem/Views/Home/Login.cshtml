@@ -2,7 +2,16 @@
 @model LoginViewModel
 
 <h3 align = "center">Log In</h3>
+@if (TempData["Unauthorized"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@TempData["Unauthorized"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
+}
 <div id="form">
 <form asp-controller="Home" asp-action="Login" method="post">
     <div asp-validation-summary="All" class="text-danger">
