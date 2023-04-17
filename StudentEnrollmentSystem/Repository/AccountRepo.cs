@@ -24,5 +24,15 @@ namespace StudentEnrollmentSystem.Repository
             return _context.Users.Include(u => u.Course).FirstOrDefault(u => u.Id == id);
         }
 
+        public bool DuplicateEmail(string email)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.NormalizedUserName == email.ToUpper());
+            if(user != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

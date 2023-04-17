@@ -1,11 +1,16 @@
 ﻿@using StudentEnrollmentSystem.ViewModels
-@model RegisterViewModel
+@model UpdateUserViewModel
+
 
 <h3 align="center">Update Student Details</h3>
 <a asp-controller="Account" asp-action="ViewAllStudents" class="card-link">Back to list</a>
 <div id="form">
     <form asp-controller="Account" asp-action="UpdateStudent" method="post">
         <div asp-validation-summary="All" class="text-danger">
+        </div>
+        <div class="form-group col-md-12">
+            <label asp-for="Id">ID</label>
+            <input class="form-control" asp-for="Id" readonly disabled />
         </div>
         <div class="form-group col-md-12">
             <label asp-for="FirstName">First Name</label>
@@ -16,8 +21,13 @@
             <input class="form-control" asp-for="LastName" />
         </div>
         <div class="form-group col-md-12">
-            <label asp-for="Email">Email Address</label>
-            <input class="form-control" asp-for="Email" readonly />
+            <label asp-for="OldEmail">Old Email Address</label>
+            <input class="form-control" asp-for="OldEmail" readonly disabled />
+        </div>
+        <input class="form-control" type ="hidden" asp-for="OldEmail" readonly />
+        <div class="form-group col-md-12">
+            <label asp-for="NewEmail">New Email Address</label>
+            <input class="form-control" asp-for="NewEmail" />
         </div>
         <div class="form-group col-md-12">
             <label class="form-label" asp-for="CourseID">Course</label>

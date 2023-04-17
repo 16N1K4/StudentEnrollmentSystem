@@ -98,11 +98,13 @@ namespace StudentEnrollmentSystem.Controllers
         public IActionResult UpdateStudent(string id)
         {
             var Student = _accountRepo.ViewOneStudent(id);
-            RegisterViewModel viewStudent = new RegisterViewModel
+            UpdateUserViewModel viewStudent = new UpdateUserViewModel
             {
+                Id = Student.Id,
                 FirstName = Student.FirstName,
                 LastName = Student.LastName,
-                Email = Student.Email,
+                OldEmail = Student.Email,
+                NewEmail = Student.Email,
                 CourseID = Student.CourseID
             };
             var CourseList = _courseRepo.ViewAllCourses();
@@ -112,15 +114,20 @@ namespace StudentEnrollmentSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateStudent(RegisterViewModel UpdatedUser)
+        public async Task<IActionResult> UpdateStudent(UpdateUserViewModel UpdatedUser)
         {
+            var CourseList = _courseRepo.ViewAllCourses();
+            ViewBag.Courses = CourseList;
+
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(UpdatedUser.Email);
+                var user = await _userManager.FindByEmailAsync(UpdatedUser.OldEmail);
 
                 user.FirstName = UpdatedUser.FirstName;
                 user.LastName = UpdatedUser.LastName;
                 user.CourseID = UpdatedUser.CourseID;
+                user.Email = UpdatedUser.NewEmail;
+                user.UserName = UpdatedUser.NewEmail;
 
                 var result = await _userManager.UpdateAsync(user);
                 if (result.Succeeded)
@@ -159,6 +166,33 @@ namespace StudentEnrollmentSystem.Controllers
             }
 
             return View();
+        }
+
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult CheckDuplicateEmail(string email)
+        {
+            if(_accountRepo.DuplicateEmail(email))
+            {
+                return Json(false);
+            }
+
+            return Json(true);
+        }
+
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult VerifyNewEmail(string OldEmail, string NewEmail)
+        {
+            if (OldEmail.ToUpper() == NewEmail.ToUpper())
+            {
+                return Json(true);
+            }
+
+            if (_accountRepo.DuplicateEmail(NewEmail))
+            {
+                return Json(false);
+            }
+
+            return Json(true);
         }
 
         [AllowAnonymous]

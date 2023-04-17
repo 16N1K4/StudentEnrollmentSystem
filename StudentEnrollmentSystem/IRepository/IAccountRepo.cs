@@ -6,5 +6,6 @@ namespace StudentEnrollmentSystem.IRepository
     {
         public List<ApplicationUser> ViewAllStudents();
         public ApplicationUser ViewOneStudent(string id);
+        public bool DuplicateEmail(string email);
     }
 }
