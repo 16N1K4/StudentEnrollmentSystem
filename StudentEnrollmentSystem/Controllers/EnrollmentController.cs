@@ -23,11 +23,6 @@ namespace StudentEnrollmentSystem.Controllers
 
         public IActionResult ViewAllSubjects()
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                TempData["Unauthorized"] = "You must be logged in to access this page.";
-                return RedirectToAction("Login", "Home");
-            }
             var SubjectList = _repo.ViewAllSubjects();
             var StudentID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             ViewBag.StudentID = StudentID;
@@ -37,11 +32,6 @@ namespace StudentEnrollmentSystem.Controllers
 
         public IActionResult ViewOneSubject(int id)
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                TempData["Unauthorized"] = "You must be logged in to access this page.";
-                return RedirectToAction("Login", "Home");
-            }
             var Subject = _repo.ViewOneSubject(id);
 
             return View(Subject);
@@ -49,11 +39,6 @@ namespace StudentEnrollmentSystem.Controllers
 
         public IActionResult ViewSchedule(string id)
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                TempData["Unauthorized"] = "You must be logged in to access this page.";
-                return RedirectToAction("Login", "Home");
-            }
             var StudentID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var Schedule = _repo.ViewSchedule(StudentID);
             ViewBag.StudentID = StudentID;

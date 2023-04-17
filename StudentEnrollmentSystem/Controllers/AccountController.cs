@@ -27,11 +27,6 @@ namespace StudentEnrollmentSystem.Controllers
 
         public IActionResult ViewAllStudents()
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                TempData["Unauthorized"] = "You must be logged in to access this page.";
-                return RedirectToAction("Login", "Home");
-            }
             var StudentList = _accountRepo.ViewAllStudents();
 
             return View(StudentList);
@@ -39,11 +34,6 @@ namespace StudentEnrollmentSystem.Controllers
 
         public IActionResult ViewOneStudent(string id)
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                TempData["Unauthorized"] = "You must be logged in to access this page.";
-                return RedirectToAction("Login", "Home");
-            }
             var Student = _accountRepo.ViewOneStudent(id);
 
             return View(Student);
@@ -52,11 +42,6 @@ namespace StudentEnrollmentSystem.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                TempData["Unauthorized"] = "You must be logged in to access this page.";
-                return RedirectToAction("Login", "Home");
-            }
             var CourseList = _courseRepo.ViewAllCourses();
             ViewBag.Courses = CourseList;
 
@@ -112,11 +97,6 @@ namespace StudentEnrollmentSystem.Controllers
         [HttpGet]
         public IActionResult UpdateStudent(string id)
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                TempData["Unauthorized"] = "You must be logged in to access this page.";
-                return RedirectToAction("Login", "Home");
-            }
             var Student = _accountRepo.ViewOneStudent(id);
             RegisterViewModel viewStudent = new RegisterViewModel
             {
@@ -179,6 +159,13 @@ namespace StudentEnrollmentSystem.Controllers
             }
 
             return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult Login()
+        {
+            TempData["Unauthorized"] = "You must be logged in to access this page.";
+            return RedirectToAction("Login", "Home");
         }
     }
 }

@@ -21,11 +21,6 @@ namespace StudentEnrollmentSystem.Controllers
 
         public IActionResult ViewAllSubjects()
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                TempData["Unauthorized"] = "You must be logged in to access this page.";
-                return RedirectToAction("Login", "Home");
-            }
             var SubjectList = _repo.ViewAllSubjects();
 
             return View(SubjectList);
@@ -33,11 +28,6 @@ namespace StudentEnrollmentSystem.Controllers
 
         public IActionResult ViewOneSubject(int id)
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                TempData["Unauthorized"] = "You must be logged in to access this page.";
-                return RedirectToAction("Login", "Home");
-            }
             var Subject = _repo.ViewOneSubject(id);
 
             return View(Subject);
@@ -46,11 +36,6 @@ namespace StudentEnrollmentSystem.Controllers
         [HttpGet]
         public IActionResult AddSubject()
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                TempData["Unauthorized"] = "You must be logged in to access this page.";
-                return RedirectToAction("Login", "Home");
-            }
             var courses = _repo.FetchCourseList();
             var faculty = _repo.FetchFacultyList();
             var sections = _repo.FetchSectionList();
@@ -78,11 +63,6 @@ namespace StudentEnrollmentSystem.Controllers
         [HttpGet]
         public IActionResult UpdateSubject(int id)
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                TempData["Unauthorized"] = "You must be logged in to access this page.";
-                return RedirectToAction("Login", "Home");
-            }
             var Subject = _repo.ViewOneSubject(id);
             var courses = _repo.FetchCourseList();
             var faculty = _repo.FetchFacultyList();

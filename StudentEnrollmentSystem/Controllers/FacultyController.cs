@@ -21,22 +21,12 @@ namespace StudentEnrollmentSystem.Controllers
 
         public IActionResult ViewAllFaculty()
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                TempData["Unauthorized"] = "You must be logged in to access this page.";
-                return RedirectToAction("Login", "Home");
-            }
             var FacultyList = _repo.ViewAllFaculty();
             return View(FacultyList);
         }
 
         public IActionResult ViewOneFaculty(int id)
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                TempData["Unauthorized"] = "You must be logged in to access this page.";
-                return RedirectToAction("Login", "Home");
-            }
             var Faculty = _repo.ViewOneFaculty(id);
             return View(Faculty);
         }
@@ -44,11 +34,6 @@ namespace StudentEnrollmentSystem.Controllers
         [HttpGet]
         public IActionResult AddFaculty()
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                TempData["Unauthorized"] = "You must be logged in to access this page.";
-                return RedirectToAction("Login", "Home");
-            }
             var DeptList = _repo.FetchDepartmentList();
             ViewBag.Departments = DeptList;
 
@@ -72,11 +57,6 @@ namespace StudentEnrollmentSystem.Controllers
         [HttpGet]
         public IActionResult UpdateFaculty(int id)
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                TempData["Unauthorized"] = "You must be logged in to access this page.";
-                return RedirectToAction("Login", "Home");
-            }
             var Faculty = _repo.ViewOneFaculty(id);
             var DeptList = _repo.FetchDepartmentList();
             ViewBag.Departments = DeptList;
