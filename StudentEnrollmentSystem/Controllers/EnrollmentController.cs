@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentEnrollmentSystem.IRepository;
 using StudentEnrollmentSystem.Models;
+using StudentEnrollmentSystem.ViewModels;
 using System.Security.Claims;
 
 namespace StudentEnrollmentSystem.Controllers
@@ -23,9 +24,9 @@ namespace StudentEnrollmentSystem.Controllers
 
         public IActionResult ViewAllSubjects()
         {
-            var SubjectList = _repo.ViewAllSubjects();
             var StudentID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             ViewBag.StudentID = StudentID;
+            var SubjectList = _repo.ViewAllSubjects(StudentID);
 
             return View(SubjectList);
         }
@@ -50,6 +51,12 @@ namespace StudentEnrollmentSystem.Controllers
         {
             try
             {
+                if (_repo.ScheduleConflict(StudentID, SubjectID))
+                {
+                    TempData["FailA"] = "The class you're trying to add has a schedule conflict with a class you've already added.";
+                    return RedirectToAction("ViewAllSubjects");
+                }
+
                 _repo.EnrollSubject(StudentID, SubjectID);
 
                 TempData["SuccessA"] = "Subject successfully enrolled!";
@@ -60,16 +67,24 @@ namespace StudentEnrollmentSystem.Controllers
                 TempData["FailB"] = "You've already added that class to your schedule.";
                 return RedirectToAction("ViewAllSubjects");
             }
-            if (_repo.ScheduleConflict(StudentID, SubjectID))
-            {
-                TempData["FailA"] = "The class you're trying to add has a schedule conflict with a class you've already added.";
-                return RedirectToAction("ViewAllSubjects");
-            }
         }
 
+        [HttpGet]
         public IActionResult DropSubject(string StudentID, int SubjectID)
         {
-            _repo.DropSubject(StudentID, SubjectID);
+            DropSubjectViewModel ToDrop = new DropSubjectViewModel
+            {
+                StudentID = StudentID,
+                SubjectID = SubjectID
+            };
+
+            return View(ToDrop);
+        }
+
+        [HttpPost]
+        public IActionResult DropSubject(DropSubjectViewModel ToDrop)
+        {
+            _repo.DropSubject(ToDrop.StudentID, ToDrop.SubjectID);
 
             TempData["SuccessB"] = "Subject successfully dropped!";
             return RedirectToAction("ViewSchedule");

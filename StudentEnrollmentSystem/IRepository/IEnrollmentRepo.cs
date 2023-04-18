@@ -4,7 +4,7 @@ namespace StudentEnrollmentSystem.IRepository
 {
     public interface IEnrollmentRepo
     {
-        public List<Subject> ViewAllSubjects();
+        public List<Subject> ViewAllSubjects(string id);
         public Subject ViewOneSubject(int id);
         public List<StudentSubject> ViewSchedule(string id);
         public StudentSubject EnrollSubject(string StudentID, int CourseID);

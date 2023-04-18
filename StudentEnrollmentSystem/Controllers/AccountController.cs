@@ -144,13 +144,25 @@ namespace StudentEnrollmentSystem.Controllers
 
             return View(UpdatedUser);
         }
-
-        public async Task<IActionResult> DeleteStudent(string id)
+        [HttpGet]
+        public IActionResult DeleteStudent(string id)
         {
             var OldUser = _accountRepo.ViewOneStudent(id);
+            DeleteUserViewModel ToDelete = new DeleteUserViewModel
+            {
+                ID = OldUser.Id
+            };
+
+            return View(ToDelete);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteStudent(DeleteUserViewModel OldUser)
+        {
+            //var OldUser = _accountRepo.ViewOneStudent(id);
             if(OldUser != null)
             {
-                var user = await _userManager.FindByIdAsync(id);
+                var user = await _userManager.FindByIdAsync(OldUser.ID);
                 var result = await _userManager.DeleteAsync(user);
 
                 if (result.Succeeded)

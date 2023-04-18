@@ -17,9 +17,15 @@ namespace StudentEnrollmentSystem.Repository
 
         #region Enrollment Operations (Student Functions)
 
-        public List<Subject> ViewAllSubjects()
+        public List<Subject> ViewAllSubjects(string id)
         {
-            return _context.Subjects.Where(sub => sub.Students.Count < sub.ClassSize).Include(sub => sub.Faculty).Include(sub => sub.Course).Include(sub => sub.Section).ToList();
+            List<Subject> SubjectList = _context.Subjects.Where(sub => sub.Students.Count < sub.ClassSize).Include(sub => sub.Faculty).Include(sub => sub.Course).Include(sub => sub.Section).ToList();
+            var Schedule = ViewSchedule(id);
+            foreach(var Subject in Schedule)
+            {
+                SubjectList.Remove(SubjectList.FirstOrDefault(sub => sub.ID == Subject.Subject.ID));
+            }
+            return SubjectList;
         }
 
         public Subject ViewOneSubject(int id)
@@ -69,7 +75,7 @@ namespace StudentEnrollmentSystem.Repository
             foreach(var sub in Schedule)
             {
                 var Subject = ViewOneSubject(sub.SubjectID);
-                if(Subject.SectionID == SubjectToAdd.SectionID)
+                if(Subject.SectionID == SubjectToAdd.SectionID && Subject.ID != SubjectToAdd.ID)
                 {
                     return true;
                 }

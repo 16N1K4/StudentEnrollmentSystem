@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentEnrollmentSystem.IRepository;
 using StudentEnrollmentSystem.Models;
+using StudentEnrollmentSystem.ViewModels;
 
 namespace StudentEnrollmentSystem.Controllers
 {
@@ -76,9 +77,22 @@ namespace StudentEnrollmentSystem.Controllers
             return View(NewCourse);
         }
 
+        [HttpGet]
         public IActionResult DeleteCourse(int id)
         {
-            _repo.DeleteCourse(id);
+            var Course = _repo.ViewOneCourse(id);
+            DeleteEntryViewModel ToDelete = new DeleteEntryViewModel
+            {
+                ID = Course.ID
+            };
+
+            return View(ToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteCourse(DeleteEntryViewModel OldEntry)
+        {
+            _repo.DeleteCourse(OldEntry.ID);
             TempData["SuccessC"] = "Course successfully deleted!";
             return RedirectToAction("ViewAllCourses");
         }
