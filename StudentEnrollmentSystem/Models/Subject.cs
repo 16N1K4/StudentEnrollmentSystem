@@ -9,23 +9,25 @@ namespace StudentEnrollmentSystem.Models
         [Key]
         public int ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The 'Name' field is required")]
         public string Name { get; set; }
 
-        [Required]
-        [Range(1, 5)]
+        [Required(ErrorMessage = "The 'Units' field is required")]
+        [Range(1, 5, ErrorMessage = "There must be a minimum of 1 unit and a maximum of 5 units")]
         public int Units { get; set; }
 
-        [Required]
-        [Range(15, 40)]
+        [Required(ErrorMessage = "The 'Class Size' field is required")]
+        [Range(15, 40, ErrorMessage = "There must be a minimum of 15 slots and a maximum of 40 slots")]
         public int ClassSize { get; set; }
-
+        [Required(ErrorMessage = "The 'Section' field is required")]
         public int SectionID { get; set; }
         public Section? Section { get; set; }
 
         public List<StudentSubject>? Students { get; set; }
+        [Required(ErrorMessage = "The 'Faculty' field is required")]
         public int FacultyID { get; set; }
         public Faculty? Faculty { get; set; }
+        [Required(ErrorMessage = "The 'Course' field is required")]
         public int CourseID { get; set; }
         public Course? Course { get; set; }
         
