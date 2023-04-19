@@ -49,7 +49,7 @@
         @foreach (var std in Model)
         {
             <tr>
-                <th scope="row"></th>
+                <th scope="row">@std.StudentNumber</th>
                 <td>@std.FirstName @std.LastName</td>
                 <td>@std.Email</td>
                 <td><a class="btn btn-primary" asp-controller="Account" asp-action="ViewOneStudent" asp-route-id="@std.Id"><i class="bi bi-eye"></i> View</a></td>
