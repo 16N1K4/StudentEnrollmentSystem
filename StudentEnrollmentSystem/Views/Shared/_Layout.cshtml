@@ -70,7 +70,7 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" id="swup" class="pb-3 transition-fade">
             @RenderBody()
         </main>
     </div>
@@ -86,12 +86,16 @@
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/r-2.4.1/datatables.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://unpkg.com/swup@3"></script>
 
 
     <script>
         $(document).ready(function () {
             $('#data').DataTable();
         });
+    </script>
+    <script>
+        const swup = new Swup();
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

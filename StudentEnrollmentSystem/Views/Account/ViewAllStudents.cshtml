@@ -40,7 +40,6 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Email Address</th>
-            <th scope="col">Course</th>
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -50,10 +49,9 @@
         @foreach (var std in Model)
         {
             <tr>
-                <th scope="row">@std.Id</th>
+                <th scope="row"></th>
                 <td>@std.FirstName @std.LastName</td>
                 <td>@std.Email</td>
-                <td>@std.Course.Name</td>
                 <td><a class="btn btn-primary" asp-controller="Account" asp-action="ViewOneStudent" asp-route-id="@std.Id"><i class="bi bi-eye"></i> View</a></td>
                 <td><a class="btn btn-warning" asp-controller="Account" asp-action="UpdateStudent" asp-route-id="@std.Id"><i class="bi bi-pencil-square"></i> Edit</a></td>
                 <td><a class="btn btn-danger" asp-controller="Account" asp-action="DeleteStudent" asp-route-id="@std.Id"><i class="bi bi-trash"></i> Delete</a></td>

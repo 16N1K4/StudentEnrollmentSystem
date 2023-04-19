@@ -12,7 +12,7 @@
             </div>
             <div class="modal-footer">
                 <a class="btn btn-secondary" asp-controller="Course" asp-action="ViewAllCourses" class="card-link">Close</a>
-                <form asp-controller="Course" asp-action="ViewCourse" method="post">
+                <form asp-controller="Course" asp-action="DeleteCourse" method="post">
                     <input type="hidden" value="@Model.ID" />
                     <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Delete</button>
                 </form>
