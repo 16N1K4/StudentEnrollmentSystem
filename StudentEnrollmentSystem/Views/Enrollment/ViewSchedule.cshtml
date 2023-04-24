@@ -39,109 +39,12 @@
     <tbody>
         @foreach (var Sub in Model)
         {
-            #region Schedule Generator
-            string code = Sub.Subject.Section.SectionCode;
-            string day = "";
-            string startTime = "";
-            string endTime = "";
-
-            switch (code[0])
-            {
-                case 'M':
-                    day = "Monday";
-                    break;
-                case 'T':
-                    day = "Tuesday";
-                    break;
-                case 'W':
-                    day = "Wednesday";
-                    break;
-                case 'H':
-                    day = "Thursday";
-                    break;
-                case 'F':
-                    day = "Friday";
-                    break;
-                case 'S':
-                    day = "Saturday";
-                    break;
-            }
-
-            switch (code[1])
-            {
-                case 'A':
-                    startTime = "07:00 AM";
-                    break;
-                case 'B':
-                    startTime = "08:30 AM";
-                    break;
-                case 'C':
-                    startTime = "10:00 AM";
-                    break;
-                case 'D':
-                    startTime = "11:30 AM";
-                    break;
-                case 'E':
-                    startTime = "1:00 PM";
-                    break;
-                case 'F':
-                    startTime = "2:30 PM";
-                    break;
-                case 'G':
-                    startTime = "4:00 PM";
-                    break;
-                case 'H':
-                    startTime = "5:30 PM";
-                    break;
-                case 'I':
-                    startTime = "7:00 PM";
-                    break;
-                case 'J':
-                    startTime = "8:30 PM";
-                    break;
-            }
-
-            switch (code[2])
-            {
-                case 'A':
-                    endTime = "07:00 AM";
-                    break;
-                case 'B':
-                    endTime = "08:30 AM";
-                    break;
-                case 'C':
-                    endTime = "10:00 AM";
-                    break;
-                case 'D':
-                    endTime = "11:30 AM";
-                    break;
-                case 'E':
-                    endTime = "1:00 PM";
-                    break;
-                case 'F':
-                    endTime = "2:30 PM";
-                    break;
-                case 'G':
-                    endTime = "4:00 PM";
-                    break;
-                case 'H':
-                    endTime = "5:30 PM";
-                    break;
-                case 'I':
-                    endTime = "7:00 PM";
-                    break;
-                case 'J':
-                    endTime = "8:30 PM";
-                    break;
-            }
-            #endregion
-
             <tr>
                 <th scope="row">@Sub.Subject.ID</th>
                 <td>@Sub.Subject.Name</td>
                 <td>@Sub.Subject.Course.Name</td>
-                <td>@code</td>
-                <td>@day, @startTime - @endTime</td>
+                <td>@Sub.Subject.Section.SectionCode</td>
+                <td>@Sub.Subject.Section.FullSchedule</td>
                 <td><a class="btn btn-primary" asp-controller="Enrollment" asp-action="ViewOneSubject" asp-route-id="@Sub.Subject.ID"><i class="bi bi-eye"></i> View</a></td>
                 <td><a class="btn btn-danger" asp-controller="Enrollment" asp-action="DropSubject" asp-route-studentID="@ViewBag.StudentID" asp-route-subjectID="@Sub.Subject.ID"><i class="bi bi-trash"></i> Drop Class</a></td>
             </tr>

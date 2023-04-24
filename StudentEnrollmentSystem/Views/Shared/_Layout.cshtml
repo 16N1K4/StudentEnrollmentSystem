@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="~/StudentEnrollmentSystem.styles.css" asp-append-version="true" />
     <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/r-2.4.1/datatables.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css" />
 </head>
 <body>
     <header>
@@ -73,8 +74,8 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" id="swup" class="pb-3 transition-fade">
+    <div class="container animsition">
+        <main role="main" class="pb-3 transition-fade">
             @RenderBody()
         </main>
     </div>
@@ -91,59 +92,48 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://unpkg.com/swup@3"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.min.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/i18n/defaults-*.min.js"></script>
     
     <script>
-        //initialize page transitions
+        //initialize DataTables
         $(document).ready(function () {
             $('#data').DataTable();
         });
+
+        //initialize Bootstrap-Select
         $(document).ready(function () {
             $('select').selectpicker();
         });
-        /*
-        const swup = new Swup();
 
-        function init() {
-            //initialize DataTables
-            if (document.querySelector('#data')) {
-                $(document).ready(function () {
-                    $('#data').DataTable();
-                });
-            }
-            //initialize bootstrap-select
-            if(document.querySelector('select')){
-                $(document).ready(function () {
-                    $('select').selectpicker();
-                });
-            }
-        }
-
-        // run once when page loads
-        if (document.readyState === 'complete') {
-            init();
-        } else {
-            document.addEventListener('DOMContentLoaded', () => init());
-        }
-
-        // run after every additional navigation by swup
-        swup.on('contentReplaced', init);
-
-        function unload() {
-            if (document.querySelector('#data')) {
-               var table = $('#data').DataTable();
-               table.destroy();
-            }
-            if (document.querySelector('select')) {
-                $('select').selectpicker('destroy');
-            }
-        }
-
-        // clean up scripts on transitions
-        swup.on('willReplaceContent', unload);
-        */
+        //Animsition page transitions
+        $(document).ready(function () {
+            $(".animsition").animsition({
+                inClass: 'fade-in',
+                outClass: 'fade-out',
+                inDuration: 750,
+                outDuration: 400,
+                linkElement: 'a:not(class["form-control"])',
+                // e.g. linkElement: 'a:not([target="_blank"]):not([href^="#"])'
+                loading: true,
+                loadingParentElement: 'body', //animsition wrapper element
+                loadingClass: 'animsition-loading',
+                loadingInner: '', // e.g '<img src="loading.svg" />'
+                timeout: true,
+                timeoutCountdown: 1000,
+                onLoadEvent: true,
+                browser: ['animation-duration', '-webkit-animation-duration'],
+                // "browser" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser.
+                // The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
+                overlay: false,
+                overlayClass: 'animsition-overlay-slide',
+                overlayParentElement: 'body',
+                transition: function (url) { window.location.href = url; }
+            });
+        });
+        
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

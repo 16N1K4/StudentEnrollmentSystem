@@ -71,11 +71,20 @@ namespace StudentEnrollmentSystem.Repository
         public bool ScheduleConflict(string StudentID, int SubjectID)
         {
             var SubjectToAdd = ViewOneSubject(SubjectID);
-            var Schedule = _context.StudentSubjects.Where(stdsub => stdsub.StudentID == StudentID).ToList();
+            var Schedule = _context.StudentSubjects.Where(stdsub => stdsub.StudentID == StudentID).Include(stdsub => stdsub.Subject).Include(stdsub => stdsub.Subject.Section).ToList();
             foreach(var sub in Schedule)
             {
                 var Subject = ViewOneSubject(sub.SubjectID);
-                if(Subject.SectionID == SubjectToAdd.SectionID && Subject.ID != SubjectToAdd.ID)
+                var SubjectToAddStart = TimeOnly.Parse(SubjectToAdd.Section.StartTime);
+                var SubjectToAddEnd = TimeOnly.Parse(SubjectToAdd.Section.EndTime);
+                var StartTimeCheck = TimeOnly.Parse(Subject.Section.StartTime);
+                var EndTimeCheck = TimeOnly.Parse(Subject.Section.EndTime);
+                if(SubjectToAddStart >= StartTimeCheck && SubjectToAddStart < EndTimeCheck)
+                {
+                    return true;
+                }
+
+                if(SubjectToAddEnd >= StartTimeCheck && SubjectToAddEnd < EndTimeCheck)
                 {
                     return true;
                 }
