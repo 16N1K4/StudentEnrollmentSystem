@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentEnrollmentSystem.Data;
 
@@ -11,9 +12,10 @@ using StudentEnrollmentSystem.Data;
 namespace StudentEnrollmentSystem.Migrations
 {
     [DbContext(typeof(SESContext))]
-    partial class SESContextModelSnapshot : ModelSnapshot
+    [Migration("20230423055807_reconfig_sections")]
+    partial class reconfig_sections
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,15 +56,15 @@ namespace StudentEnrollmentSystem.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "03ee7b87-22be-480b-b789-5ade53e3a0d3",
-                            ConcurrencyStamp = "2c71f256-e52e-4ce5-92b9-c587ede3b5f2",
+                            Id = "747c9aba-15d5-4a37-97cb-46e4a2e4c3cf",
+                            ConcurrencyStamp = "8c4145ff-cb96-4aee-bb1c-b51b9a3edf66",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "89e1bbc4-24fc-4eef-b8cc-6020dc9b4286",
-                            ConcurrencyStamp = "f6e4f24d-924b-4ad9-8f65-120ccc7933e0",
+                            Id = "c1742731-5847-4179-a6e9-481c8e72a7da",
+                            ConcurrencyStamp = "e5a82be4-136a-42da-9cad-c77731b93b06",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         });
@@ -379,433 +381,487 @@ namespace StudentEnrollmentSystem.Migrations
                         {
                             ID = 1,
                             Day = "Monday",
-                            EndTime = "8:30 AM",
-                            FullSchedule = "Monday, 7:00 AM-8:30 AM",
-                            SectionCode = "MAD",
-                            StartTime = "7:00 AM"
+                            EndTime = "8:30AM",
+                            FullSchedule = "Monday, 7:00AM-8:30AM",
+                            SectionCode = "MAB",
+                            StartTime = "7:00AM"
                         },
                         new
                         {
                             ID = 2,
                             Day = "Monday",
-                            EndTime = "10:00 AM",
-                            FullSchedule = "Monday, 8:30 AM-10:00 AM",
-                            SectionCode = "MDG",
-                            StartTime = "8:30 AM"
+                            EndTime = "10:00AM",
+                            FullSchedule = "Monday, 8:30AM-10:00AM",
+                            SectionCode = "MBC",
+                            StartTime = "8:30AM"
                         },
                         new
                         {
                             ID = 3,
                             Day = "Monday",
-                            EndTime = "11:30 AM",
-                            FullSchedule = "Monday, 10:00 AM-11:30 AM",
-                            SectionCode = "MGJ",
-                            StartTime = "10:00 AM"
+                            EndTime = "11:30AM",
+                            FullSchedule = "Monday, 10:00AM-11:30AM",
+                            SectionCode = "MCD",
+                            StartTime = "10:00AM"
                         },
                         new
                         {
                             ID = 4,
                             Day = "Monday",
-                            EndTime = "1:00 PM",
-                            FullSchedule = "Monday, 11:30 AM-1:00 PM",
-                            SectionCode = "MJM",
-                            StartTime = "11:30 AM"
+                            EndTime = "1:00PM",
+                            FullSchedule = "Monday, 11:30AM-1:00PM",
+                            SectionCode = "MDE",
+                            StartTime = "11:30AM"
                         },
                         new
                         {
                             ID = 5,
                             Day = "Monday",
-                            EndTime = "2:30 PM",
-                            FullSchedule = "Monday, 1:00 PM-2:30 PM",
-                            SectionCode = "MMP",
-                            StartTime = "1:00 PM"
+                            EndTime = "2:30PM",
+                            FullSchedule = "Monday, 1:00PM-2:30PM",
+                            SectionCode = "MEF",
+                            StartTime = "1:00PM"
                         },
                         new
                         {
                             ID = 6,
                             Day = "Monday",
-                            EndTime = "4:00 PM",
-                            FullSchedule = "Monday, 2:30 PM-4:00 PM",
-                            SectionCode = "MPS",
-                            StartTime = "2:30 PM"
+                            EndTime = "4:00PM",
+                            FullSchedule = "Monday, 2:30PM-4:00PM",
+                            SectionCode = "MFG",
+                            StartTime = "2:30PM"
                         },
                         new
                         {
                             ID = 7,
                             Day = "Monday",
-                            EndTime = "5:30 PM",
-                            FullSchedule = "Monday, 4:00 PM-5:30 PM",
-                            SectionCode = "MSV",
-                            StartTime = "4:00 PM"
+                            EndTime = "5:30PM",
+                            FullSchedule = "Monday, 4:00PM-5:30PM",
+                            SectionCode = "MGH",
+                            StartTime = "4:00PM"
                         },
                         new
                         {
                             ID = 8,
                             Day = "Monday",
-                            EndTime = "7:00 PM",
-                            FullSchedule = "Monday, 5:30 PM-7:00 PM",
-                            SectionCode = "MVY",
-                            StartTime = "5:30 PM"
+                            EndTime = "7:00PM",
+                            FullSchedule = "Monday, 5:30PM-7:00PM",
+                            SectionCode = "MHI",
+                            StartTime = "5:30PM"
                         },
                         new
                         {
                             ID = 9,
-                            Day = "Tuesday",
-                            EndTime = "8:30 AM",
-                            FullSchedule = "Tuesday, 7:00 AM-8:30 AM",
-                            SectionCode = "TAD",
-                            StartTime = "7:00 AM"
+                            Day = "Monday",
+                            EndTime = "8:30PM",
+                            FullSchedule = "Monday, 7:00PM-8:30PM",
+                            SectionCode = "MIJ",
+                            StartTime = "7:00PM"
                         },
                         new
                         {
                             ID = 10,
                             Day = "Tuesday",
-                            EndTime = "10:00 AM",
-                            FullSchedule = "Tuesday, 8:30 AM-10:00 AM",
-                            SectionCode = "TDG",
-                            StartTime = "8:30 AM"
+                            EndTime = "8:30AM",
+                            FullSchedule = "Tuesday, 7:00AM-8:30AM",
+                            SectionCode = "TAB",
+                            StartTime = "7:00AM"
                         },
                         new
                         {
                             ID = 11,
                             Day = "Tuesday",
-                            EndTime = "11:30 AM",
-                            FullSchedule = "Tuesday, 10:00 AM-11:30 AM",
-                            SectionCode = "TGJ",
-                            StartTime = "10:00 AM"
+                            EndTime = "10:00AM",
+                            FullSchedule = "Tuesday, 8:30AM-10:00AM",
+                            SectionCode = "TBC",
+                            StartTime = "8:30AM"
                         },
                         new
                         {
                             ID = 12,
                             Day = "Tuesday",
-                            EndTime = "1:00 PM",
-                            FullSchedule = "Tuesday, 11:30 AM-1:00 PM",
-                            SectionCode = "TJM",
-                            StartTime = "11:30 AM"
+                            EndTime = "11:30AM",
+                            FullSchedule = "Tuesday, 10:00AM-11:30AM",
+                            SectionCode = "TCD",
+                            StartTime = "10:00AM"
                         },
                         new
                         {
                             ID = 13,
                             Day = "Tuesday",
-                            EndTime = "2:30 PM",
-                            FullSchedule = "Tuesday, 1:00 PM-2:30 PM",
-                            SectionCode = "TMP",
-                            StartTime = "1:00 PM"
+                            EndTime = "1:00PM",
+                            FullSchedule = "Tuesday, 11:30AM-1:00PM",
+                            SectionCode = "TDE",
+                            StartTime = "11:30AM"
                         },
                         new
                         {
                             ID = 14,
                             Day = "Tuesday",
-                            EndTime = "4:00 PM",
-                            FullSchedule = "Tuesday, 2:30 PM-4:00 PM",
-                            SectionCode = "TPS",
-                            StartTime = "2:30 PM"
+                            EndTime = "2:30PM",
+                            FullSchedule = "Tuesday, 1:00PM-2:30PM",
+                            SectionCode = "TEF",
+                            StartTime = "1:00PM"
                         },
                         new
                         {
                             ID = 15,
                             Day = "Tuesday",
-                            EndTime = "5:30 PM",
-                            FullSchedule = "Tuesday, 4:00 PM-5:30 PM",
-                            SectionCode = "TSV",
-                            StartTime = "4:00 PM"
+                            EndTime = "4:00PM",
+                            FullSchedule = "Tuesday, 2:30PM-4:00PM",
+                            SectionCode = "TFG",
+                            StartTime = "2:30PM"
                         },
                         new
                         {
                             ID = 16,
                             Day = "Tuesday",
-                            EndTime = "7:00 PM",
-                            FullSchedule = "Tuesday, 5:30 PM-7:00 PM",
-                            SectionCode = "TVY",
-                            StartTime = "5:30 PM"
+                            EndTime = "5:30PM",
+                            FullSchedule = "Tuesday, 4:00PM-5:30PM",
+                            SectionCode = "TGH",
+                            StartTime = "4:00PM"
                         },
                         new
                         {
                             ID = 17,
-                            Day = "Wednesday",
-                            EndTime = "8:30 AM",
-                            FullSchedule = "Wednesday, 7:00 AM-8:30 AM",
-                            SectionCode = "WAD",
-                            StartTime = "7:00 AM"
+                            Day = "Tuesday",
+                            EndTime = "7:00PM",
+                            FullSchedule = "Tuesday, 5:30PM-7:00PM",
+                            SectionCode = "THI",
+                            StartTime = "5:30PM"
                         },
                         new
                         {
                             ID = 18,
-                            Day = "Wednesday",
-                            EndTime = "10:00 AM",
-                            FullSchedule = "Wednesday, 8:30 AM-10:00 AM",
-                            SectionCode = "WDG",
-                            StartTime = "8:30 AM"
+                            Day = "Tuesday",
+                            EndTime = "8:30PM",
+                            FullSchedule = "Tuesday, 7:00PM-8:30PM",
+                            SectionCode = "TIJ",
+                            StartTime = "7:00PM"
                         },
                         new
                         {
                             ID = 19,
                             Day = "Wednesday",
-                            EndTime = "11:30 AM",
-                            FullSchedule = "Wednesday, 10:00 AM-11:30 AM",
-                            SectionCode = "WGJ",
-                            StartTime = "10:00 AM"
+                            EndTime = "8:30AM",
+                            FullSchedule = "Wednesday, 7:00AM-8:30AM",
+                            SectionCode = "WAB",
+                            StartTime = "7:00AM"
                         },
                         new
                         {
                             ID = 20,
                             Day = "Wednesday",
-                            EndTime = "1:00 PM",
-                            FullSchedule = "Wednesday, 11:30 AM-1:00 PM",
-                            SectionCode = "WJM",
-                            StartTime = "11:30 AM"
+                            EndTime = "10:00AM",
+                            FullSchedule = "Wednesday, 8:30AM-10:00AM",
+                            SectionCode = "WBC",
+                            StartTime = "8:30AM"
                         },
                         new
                         {
                             ID = 21,
                             Day = "Wednesday",
-                            EndTime = "2:30 PM",
-                            FullSchedule = "Wednesday, 1:00 PM-2:30 PM",
-                            SectionCode = "WMP",
-                            StartTime = "1:00 PM"
+                            EndTime = "11:30AM",
+                            FullSchedule = "Wednesday, 10:00AM-11:30AM",
+                            SectionCode = "WCD",
+                            StartTime = "10:00AM"
                         },
                         new
                         {
                             ID = 22,
                             Day = "Wednesday",
-                            EndTime = "4:00 PM",
-                            FullSchedule = "Wednesday, 2:30 PM-4:00 PM",
-                            SectionCode = "WPS",
-                            StartTime = "2:30 PM"
+                            EndTime = "1:00PM",
+                            FullSchedule = "Wednesday, 11:30AM-1:00PM",
+                            SectionCode = "WDE",
+                            StartTime = "11:30AM"
                         },
                         new
                         {
                             ID = 23,
                             Day = "Wednesday",
-                            EndTime = "5:30 PM",
-                            FullSchedule = "Wednesday, 4:00 PM-5:30 PM",
-                            SectionCode = "WSV",
-                            StartTime = "4:00 PM"
+                            EndTime = "2:30PM",
+                            FullSchedule = "Wednesday, 1:00PM-2:30PM",
+                            SectionCode = "WEF",
+                            StartTime = "1:00PM"
                         },
                         new
                         {
                             ID = 24,
                             Day = "Wednesday",
-                            EndTime = "7:00 PM",
-                            FullSchedule = "Wednesday, 5:30 PM-7:00 PM",
-                            SectionCode = "WVY",
-                            StartTime = "5:30 PM"
+                            EndTime = "4:00PM",
+                            FullSchedule = "Wednesday, 2:30PM-4:00PM",
+                            SectionCode = "WFG",
+                            StartTime = "2:30PM"
                         },
                         new
                         {
                             ID = 25,
-                            Day = "Thursday",
-                            EndTime = "8:30 AM",
-                            FullSchedule = "Thursday, 7:00 AM-8:30 AM",
-                            SectionCode = "HAD",
-                            StartTime = "7:00 AM"
+                            Day = "Wednesday",
+                            EndTime = "5:30PM",
+                            FullSchedule = "Wednesday, 4:00PM-5:30PM",
+                            SectionCode = "WGH",
+                            StartTime = "4:00PM"
                         },
                         new
                         {
                             ID = 26,
-                            Day = "Thursday",
-                            EndTime = "10:00 AM",
-                            FullSchedule = "Thursday, 8:30 AM-10:00 AM",
-                            SectionCode = "HDG",
-                            StartTime = "8:30 AM"
+                            Day = "Wednesday",
+                            EndTime = "7:00PM",
+                            FullSchedule = "Wednesday, 5:30PM-7:00PM",
+                            SectionCode = "WHI",
+                            StartTime = "5:30PM"
                         },
                         new
                         {
                             ID = 27,
-                            Day = "Thursday",
-                            EndTime = "11:30 AM",
-                            FullSchedule = "Thursday, 10:00 AM-11:30 AM",
-                            SectionCode = "HGJ",
-                            StartTime = "10:00 AM"
+                            Day = "Wednesday",
+                            EndTime = "8:30PM",
+                            FullSchedule = "Wednesday, 7:00PM-8:30PM",
+                            SectionCode = "WIJ",
+                            StartTime = "7:00PM"
                         },
                         new
                         {
                             ID = 28,
                             Day = "Thursday",
-                            EndTime = "1:00 PM",
-                            FullSchedule = "Thursday, 11:30 AM-1:00 PM",
-                            SectionCode = "HJM",
-                            StartTime = "11:30 AM"
+                            EndTime = "8:30AM",
+                            FullSchedule = "Thursday, 7:00AM-8:30AM",
+                            SectionCode = "HAB",
+                            StartTime = "7:00AM"
                         },
                         new
                         {
                             ID = 29,
                             Day = "Thursday",
-                            EndTime = "2:30 PM",
-                            FullSchedule = "Thursday, 1:00 PM-2:30 PM",
-                            SectionCode = "HMP",
-                            StartTime = "1:00 PM"
+                            EndTime = "10:00AM",
+                            FullSchedule = "Thursday, 8:30AM-10:00AM",
+                            SectionCode = "HBC",
+                            StartTime = "8:30AM"
                         },
                         new
                         {
                             ID = 30,
                             Day = "Thursday",
-                            EndTime = "4:00 PM",
-                            FullSchedule = "Thursday, 2:30 PM-4:00 PM",
-                            SectionCode = "HPS",
-                            StartTime = "2:30 PM"
+                            EndTime = "11:30AM",
+                            FullSchedule = "Thursday, 10:00AM-11:30AM",
+                            SectionCode = "HCD",
+                            StartTime = "10:00AM"
                         },
                         new
                         {
                             ID = 31,
                             Day = "Thursday",
-                            EndTime = "5:30 PM",
-                            FullSchedule = "Thursday, 4:00 PM-5:30 PM",
-                            SectionCode = "HSV",
-                            StartTime = "4:00 PM"
+                            EndTime = "1:00PM",
+                            FullSchedule = "Thursday, 11:30AM-1:00PM",
+                            SectionCode = "HDE",
+                            StartTime = "11:30AM"
                         },
                         new
                         {
                             ID = 32,
                             Day = "Thursday",
-                            EndTime = "7:00 PM",
-                            FullSchedule = "Thursday, 5:30 PM-7:00 PM",
-                            SectionCode = "HVY",
-                            StartTime = "5:30 PM"
+                            EndTime = "2:30PM",
+                            FullSchedule = "Thursday, 1:00PM-2:30PM",
+                            SectionCode = "HEF",
+                            StartTime = "1:00PM"
                         },
                         new
                         {
                             ID = 33,
-                            Day = "Friday",
-                            EndTime = "8:30 AM",
-                            FullSchedule = "Friday, 7:00 AM-8:30 AM",
-                            SectionCode = "FAD",
-                            StartTime = "7:00 AM"
+                            Day = "Thursday",
+                            EndTime = "4:00PM",
+                            FullSchedule = "Thursday, 2:30PM-4:00PM",
+                            SectionCode = "HFG",
+                            StartTime = "2:30PM"
                         },
                         new
                         {
                             ID = 34,
-                            Day = "Friday",
-                            EndTime = "10:00 AM",
-                            FullSchedule = "Friday, 8:30 AM-10:00 AM",
-                            SectionCode = "FDG",
-                            StartTime = "8:30 AM"
+                            Day = "Thursday",
+                            EndTime = "5:30PM",
+                            FullSchedule = "Thursday, 4:00PM-5:30PM",
+                            SectionCode = "HGH",
+                            StartTime = "4:00PM"
                         },
                         new
                         {
                             ID = 35,
-                            Day = "Friday",
-                            EndTime = "11:30 AM",
-                            FullSchedule = "Friday, 10:00 AM-11:30 AM",
-                            SectionCode = "FGJ",
-                            StartTime = "10:00 AM"
+                            Day = "Thursday",
+                            EndTime = "7:00PM",
+                            FullSchedule = "Thursday, 5:30PM-7:00PM",
+                            SectionCode = "HHI",
+                            StartTime = "5:30PM"
                         },
                         new
                         {
                             ID = 36,
-                            Day = "Friday",
-                            EndTime = "1:00 PM",
-                            FullSchedule = "Friday, 11:30 AM-1:00 PM",
-                            SectionCode = "FJM",
-                            StartTime = "11:30 AM"
+                            Day = "Thursday",
+                            EndTime = "8:30PM",
+                            FullSchedule = "Thursday, 7:00PM-8:30PM",
+                            SectionCode = "HIJ",
+                            StartTime = "7:00PM"
                         },
                         new
                         {
                             ID = 37,
                             Day = "Friday",
-                            EndTime = "2:30 PM",
-                            FullSchedule = "Friday, 1:00 PM-2:30 PM",
-                            SectionCode = "FMP",
-                            StartTime = "1:00 PM"
+                            EndTime = "8:30AM",
+                            FullSchedule = "Friday, 7:00AM-8:30AM",
+                            SectionCode = "FAB",
+                            StartTime = "7:00AM"
                         },
                         new
                         {
                             ID = 38,
                             Day = "Friday",
-                            EndTime = "4:00 PM",
-                            FullSchedule = "Friday, 2:30 PM-4:00 PM",
-                            SectionCode = "FPS",
-                            StartTime = "2:30 PM"
+                            EndTime = "10:00AM",
+                            FullSchedule = "Friday, 8:30AM-10:00AM",
+                            SectionCode = "FBC",
+                            StartTime = "8:30AM"
                         },
                         new
                         {
                             ID = 39,
                             Day = "Friday",
-                            EndTime = "5:30 PM",
-                            FullSchedule = "Friday, 4:00 PM-5:30 PM",
-                            SectionCode = "FSV",
-                            StartTime = "4:00 PM"
+                            EndTime = "11:30AM",
+                            FullSchedule = "Friday, 10:00AM-11:30AM",
+                            SectionCode = "FCD",
+                            StartTime = "10:00AM"
                         },
                         new
                         {
                             ID = 40,
                             Day = "Friday",
-                            EndTime = "7:00 PM",
-                            FullSchedule = "Friday, 5:30 PM-7:00 PM",
-                            SectionCode = "FVY",
-                            StartTime = "5:30 PM"
+                            EndTime = "1:00PM",
+                            FullSchedule = "Friday, 11:30AM-1:00PM",
+                            SectionCode = "FDE",
+                            StartTime = "11:30AM"
                         },
                         new
                         {
                             ID = 41,
-                            Day = "Saturday",
-                            EndTime = "8:30 AM",
-                            FullSchedule = "Saturday, 7:00 AM-8:30 AM",
-                            SectionCode = "SAD",
-                            StartTime = "7:00 AM"
+                            Day = "Friday",
+                            EndTime = "2:30PM",
+                            FullSchedule = "Friday, 1:00PM-2:30PM",
+                            SectionCode = "FEF",
+                            StartTime = "1:00PM"
                         },
                         new
                         {
                             ID = 42,
-                            Day = "Saturday",
-                            EndTime = "10:00 AM",
-                            FullSchedule = "Saturday, 8:30 AM-10:00 AM",
-                            SectionCode = "SDG",
-                            StartTime = "8:30 AM"
+                            Day = "Friday",
+                            EndTime = "4:00PM",
+                            FullSchedule = "Friday, 2:30PM-4:00PM",
+                            SectionCode = "FFG",
+                            StartTime = "2:30PM"
                         },
                         new
                         {
                             ID = 43,
-                            Day = "Saturday",
-                            EndTime = "11:30 AM",
-                            FullSchedule = "Saturday, 10:00 AM-11:30 AM",
-                            SectionCode = "SGJ",
-                            StartTime = "10:00 AM"
+                            Day = "Friday",
+                            EndTime = "5:30PM",
+                            FullSchedule = "Friday, 4:00PM-5:30PM",
+                            SectionCode = "FGH",
+                            StartTime = "4:00PM"
                         },
                         new
                         {
                             ID = 44,
-                            Day = "Saturday",
-                            EndTime = "1:00 PM",
-                            FullSchedule = "Saturday, 11:30 AM-1:00 PM",
-                            SectionCode = "SJM",
-                            StartTime = "11:30 AM"
+                            Day = "Friday",
+                            EndTime = "7:00PM",
+                            FullSchedule = "Friday, 5:30PM-7:00PM",
+                            SectionCode = "FHI",
+                            StartTime = "5:30PM"
                         },
                         new
                         {
                             ID = 45,
-                            Day = "Saturday",
-                            EndTime = "2:30 PM",
-                            FullSchedule = "Saturday, 1:00 PM-2:30 PM",
-                            SectionCode = "SMP",
-                            StartTime = "1:00 PM"
+                            Day = "Friday",
+                            EndTime = "8:30PM",
+                            FullSchedule = "Friday, 7:00PM-8:30PM",
+                            SectionCode = "FIJ",
+                            StartTime = "7:00PM"
                         },
                         new
                         {
                             ID = 46,
                             Day = "Saturday",
-                            EndTime = "4:00 PM",
-                            FullSchedule = "Saturday, 2:30 PM-4:00 PM",
-                            SectionCode = "SPS",
-                            StartTime = "2:30 PM"
+                            EndTime = "8:30AM",
+                            FullSchedule = "Saturday, 7:00AM-8:30AM",
+                            SectionCode = "SAB",
+                            StartTime = "7:00AM"
                         },
                         new
                         {
                             ID = 47,
                             Day = "Saturday",
-                            EndTime = "5:30 PM",
-                            FullSchedule = "Saturday, 4:00 PM-5:30 PM",
-                            SectionCode = "SSV",
-                            StartTime = "4:00 PM"
+                            EndTime = "10:00AM",
+                            FullSchedule = "Saturday, 8:30AM-10:00AM",
+                            SectionCode = "SBC",
+                            StartTime = "8:30AM"
                         },
                         new
                         {
                             ID = 48,
                             Day = "Saturday",
-                            EndTime = "7:00 PM",
-                            FullSchedule = "Saturday, 5:30 PM-7:00 PM",
-                            SectionCode = "SVY",
-                            StartTime = "5:30 PM"
+                            EndTime = "11:30AM",
+                            FullSchedule = "Saturday, 10:00AM-11:30AM",
+                            SectionCode = "SCD",
+                            StartTime = "10:00AM"
+                        },
+                        new
+                        {
+                            ID = 49,
+                            Day = "Saturday",
+                            EndTime = "1:00PM",
+                            FullSchedule = "Saturday, 11:30AM-1:00PM",
+                            SectionCode = "SDE",
+                            StartTime = "11:30AM"
+                        },
+                        new
+                        {
+                            ID = 50,
+                            Day = "Saturday",
+                            EndTime = "2:30PM",
+                            FullSchedule = "Saturday, 1:00PM-2:30PM",
+                            SectionCode = "SEF",
+                            StartTime = "1:00PM"
+                        },
+                        new
+                        {
+                            ID = 51,
+                            Day = "Saturday",
+                            EndTime = "4:00PM",
+                            FullSchedule = "Saturday, 2:30PM-4:00PM",
+                            SectionCode = "SFG",
+                            StartTime = "2:30PM"
+                        },
+                        new
+                        {
+                            ID = 52,
+                            Day = "Saturday",
+                            EndTime = "5:30PM",
+                            FullSchedule = "Saturday, 4:00PM-5:30PM",
+                            SectionCode = "SGH",
+                            StartTime = "4:00PM"
+                        },
+                        new
+                        {
+                            ID = 53,
+                            Day = "Saturday",
+                            EndTime = "7:00PM",
+                            FullSchedule = "Saturday, 5:30PM-7:00PM",
+                            SectionCode = "SHI",
+                            StartTime = "5:30PM"
+                        },
+                        new
+                        {
+                            ID = 54,
+                            Day = "Saturday",
+                            EndTime = "8:30PM",
+                            FullSchedule = "saturday, 7:00PM-8:30PM",
+                            SectionCode = "SIJ",
+                            StartTime = "7:00PM"
                         });
                 });
 

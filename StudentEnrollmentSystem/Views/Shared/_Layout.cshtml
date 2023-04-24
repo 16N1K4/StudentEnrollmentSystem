@@ -49,6 +49,9 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Subject" asp-action="ViewAllSubjects">Subjects</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Section" asp-action="ViewAllSections">Sections</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="ViewAllStudents">Accounts</a>
                             </li>
                         }
@@ -120,6 +123,19 @@
 
         // run after every additional navigation by swup
         swup.on('contentReplaced', init);
+
+        function unload() {
+            if (document.querySelector('#data')) {
+               var table = $('#data').DataTable();
+               table.destroy();
+            }
+            if (document.querySelector('select')) {
+                $('select').selectpicker('destroy');
+            }
+        }
+
+        // clean up scripts on transitions
+        swup.on('willReplaceContent', unload);
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

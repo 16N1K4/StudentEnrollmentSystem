@@ -1,0 +1,28 @@
+﻿@using StudentEnrollmentSystem.ViewModels
+@model DeleteEntryViewModel
+
+<div class="modal fade" id="delete" tabindex="-1" aria-labelledby="deleteLabel" data-bs-show="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteLabel">Confirm Deletion</h5>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this entry?</p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-secondary" asp-controller="Section" asp-action="ViewAllSections" class="card-link">Close</a>
+                <form asp-controller="Section" asp-action="DeleteSection" method="post">
+                    <input type="hidden" value="@Model.ID" />
+                    <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.onload = () => {
+        $('#delete').modal('show');
+    }
+</script>

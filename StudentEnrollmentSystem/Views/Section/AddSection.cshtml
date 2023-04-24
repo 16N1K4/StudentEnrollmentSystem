@@ -1,0 +1,26 @@
+﻿@model Section
+
+<h3 align="center"> Create Section</h3>
+<a asp-controller="Section" asp-action="ViewAllSections" class="btn btn-info"><i class="bi bi-box-arrow-left"></i>Back to list</a>
+<div id="form">
+    <form method="post" asp-action="AddSection" asp-controller="Section">
+
+        <div class="form-group col-md-12">
+            <label class="form-label" asp-for="Day">Day</label>
+            @Html.DropDownListFor(x => x.Day, new SelectList(ViewBag.Days, "Value", "Text"), "Select Value", new {@class = "form-control show-tick", @data_live_search = "true"})
+            <span asp-validation-for="Day" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-12">
+            <label class="form-label" asp-for="StartTime">Start Time</label>
+            @Html.DropDownListFor(x => x.StartTime, new SelectList(ViewBag.Times, "Value", "Text"), "Select Value", new {@class = "form-control show-tick", @data_live_search = "true"})
+            <span asp-validation-for="StartTime" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-12">
+            <label class="form-label" asp-for="EndTime">End Time</label>
+            @Html.DropDownListFor(x => x.EndTime, new SelectList(ViewBag.Times, "Value", "Text"), "Select Value", new {@class = "form-control show-tick", @data_live_search = "true"})
+            <span asp-validation-for="EndTime" class="text-danger"></span>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Submit</button>
+    </form>
+</div>

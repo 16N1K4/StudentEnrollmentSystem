@@ -1,0 +1,62 @@
+﻿@model List<Section>
+
+
+<h3 align="center">Section List</h3>
+@if (TempData["SuccessA"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@TempData["SuccessA"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+}
+@if (TempData["SuccessB"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@TempData["SuccessB"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+}
+@if (TempData["SuccessC"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@TempData["SuccessC"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+}
+
+<a class="btn btn-success" asp-action="AddSection" asp-controller="Section"><i class="bi bi-plus-circle"></i> Add Section</a>
+<br />
+<table class="table table-striped table-info" id="data">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Section Code</th>
+            <th scope="col">Schedule</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Sec in Model)
+        {
+            <tr>
+                <th scope="row">@Sec.ID</th>
+                <td>@Sec.SectionCode</td>
+                <td>@Sec.FullSchedule</td>
+                <td><a class="btn btn-primary" asp-controller="Section" asp-action="ViewOneSection" asp-route-id="@Sec.ID"><i class="bi bi-eye"></i> View</a></td>
+                <td><a class="btn btn-warning" asp-controller="Section" asp-action="UpdateSection" asp-route-id="@Sec.ID"><i class="bi bi-pencil-square"></i> Edit</a></td>
+                <td><a class="btn btn-danger" asp-controller="Section" asp-action="DeleteSection" asp-route-id="@Sec.ID"><i class="bi bi-trash"></i> Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
