@@ -9,7 +9,7 @@ namespace StudentEnrollmentSystem.Models
         public int ID { get; set; }
         public string? SectionCode { get; set; }
         [Required(ErrorMessage = "Day is a required field")]
-        [Remote(action: "DuplicateSchedule", controller: "Section", AdditionalFields = "StartTime,EndTime", ErrorMessage = "A section with this exact schedule already exists.")]
+        [Remote(action: "DuplicateSchedule", controller: "Section", AdditionalFields = "StartTime, EndTime", ErrorMessage = "A section with this exact schedule already exists.")]
         public string Day { get; set; }
         [Required(ErrorMessage = "Start Time is a required field")]
         [Remote(action: "CheckStartEndTime", controller: "Section", AdditionalFields = "EndTime", ErrorMessage = "The start time cannot be later or equal to the end time.")]

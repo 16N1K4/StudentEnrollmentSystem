@@ -48,6 +48,7 @@ namespace StudentEnrollmentSystem.Repository
             if(OldSection != null)
             {
                 _context.Sections.Remove(OldSection);
+                _context.SaveChanges();
                 return OldSection;
             }
 
@@ -432,10 +433,13 @@ namespace StudentEnrollmentSystem.Repository
 
         public bool CheckDuplicate(string day, string startTime, string endTime)
         {
-            var Duplicate = _context.Sections.FirstOrDefault(sec => sec.Day == day && sec.StartTime == startTime && sec.EndTime == endTime);
-            if(Duplicate != null)
+            var SectionList = ViewAllSections();
+            foreach (Section sec in SectionList)
             {
-                return true;
+                if (sec.Day == day && sec.StartTime == startTime && sec.EndTime == endTime)
+                {
+                    return true;
+                }
             }
 
             return false;

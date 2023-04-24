@@ -35,7 +35,7 @@ namespace StudentEnrollmentSystem.Controllers
             {
                 if (User.IsInRole("Administrator"))
                 {
-                    return RedirectToAction("ViewAllFaculty", "Faculty");
+                    return RedirectToAction("ViewAllDepartments", "Department");
                 }
 
 

@@ -37,6 +37,14 @@ namespace StudentEnrollmentSystem.Repository
         public Subject UpdateSubject(Subject NewSubject)
         {
             _context.Subjects.Update(NewSubject);
+            var EnrolledList = _context.StudentSubjects.ToList();
+            foreach(StudentSubject stdsub in EnrolledList)
+            {
+                if(stdsub.SubjectID == NewSubject.ID)
+                {
+                    _context.StudentSubjects.Remove(stdsub);
+                }
+            }
             _context.SaveChanges();
 
             return NewSubject;

@@ -97,6 +97,13 @@
     
     <script>
         //initialize page transitions
+        $(document).ready(function () {
+            $('#data').DataTable();
+        });
+        $(document).ready(function () {
+            $('select').selectpicker();
+        });
+        /*
         const swup = new Swup();
 
         function init() {
@@ -136,6 +143,7 @@
 
         // clean up scripts on transitions
         swup.on('willReplaceContent', unload);
+        */
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
