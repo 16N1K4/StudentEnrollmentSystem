@@ -11,7 +11,6 @@ namespace StudentEnrollmentSystem.Models
         [Required(ErrorMessage = "The 'Last Name' field is required")]
         public string LastName { get; set; }
         public int StudentNumber { get; set; }
-        [Required(ErrorMessage = "The 'Course' field is required")]
         public int CourseID { get; set; }
         public Course? Course { get; set; }
         public List<StudentSubject>? Subjects { get; set; }

@@ -35,7 +35,6 @@ namespace StudentEnrollmentSystem.Controllers
         public IActionResult ViewOneStudent(string id)
         {
             var Student = _accountRepo.ViewOneStudent(id);
-
             return View(Student);
         }
 
@@ -159,7 +158,6 @@ namespace StudentEnrollmentSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteStudent(DeleteUserViewModel OldUser)
         {
-            //var OldUser = _accountRepo.ViewOneStudent(id);
             if(OldUser != null)
             {
                 var user = await _userManager.FindByIdAsync(OldUser.ID);

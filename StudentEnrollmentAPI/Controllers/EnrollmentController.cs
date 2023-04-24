@@ -36,16 +36,8 @@ namespace StudentEnrollmentAPI.Controllers
                 if (loginResult.Succeeded)
                 {
                     // generate a token
-                    var user = _repo.FindUserByEmailAsync(loginDTO.UserName);
-                    string role = "";
-                    if (User.IsInRole("Administrator"))
-                    {
-                        role = "Administrator";
-                    }
-                    else
-                    {
-                        role = "Student";
-                    }
+                    var user = await _repo.FindUserByEmailAsync(loginDTO.UserName);
+                    string role = await _repo.GetUserRole(user);
                     var claims = new[]
                     {
                         new Claim(ClaimTypes.Name, loginDTO.UserName),
@@ -85,9 +77,9 @@ namespace StudentEnrollmentAPI.Controllers
                         Units = Subject.Subject.Units,
                         ClassSize = Subject.Subject.ClassSize,
                         SectionCode = Subject.Subject.Section.SectionCode,
-                        ScheduleDay = _repo.ScheduleDay(Subject.Subject.Section.SectionCode[0]),
-                        StartTime = _repo.StartTime(Subject.Subject.Section.SectionCode[1]),
-                        EndTime = _repo.EndTime(Subject.Subject.Section.SectionCode[2]),
+                        ScheduleDay = Subject.Subject.Section.Day,
+                        StartTime = Subject.Subject.Section.StartTime,
+                        EndTime = Subject.Subject.Section.EndTime,
                         FacultyName = Subject.Subject.Faculty.FullName,
                         CourseName = Subject.Subject.Course.Name
                     }
@@ -115,9 +107,9 @@ namespace StudentEnrollmentAPI.Controllers
                         Units = Subject.Subject.Units,
                         ClassSize = Subject.Subject.ClassSize,
                         SectionCode = Subject.Subject.Section.SectionCode,
-                        ScheduleDay = _repo.ScheduleDay(Subject.Subject.Section.SectionCode[0]),
-                        StartTime = _repo.StartTime(Subject.Subject.Section.SectionCode[1]),
-                        EndTime = _repo.EndTime(Subject.Subject.Section.SectionCode[2]),
+                        ScheduleDay = Subject.Subject.Section.Day,
+                        StartTime = Subject.Subject.Section.StartTime,
+                        EndTime = Subject.Subject.Section.EndTime,
                         FacultyName = Subject.Subject.Faculty.FullName,
                         CourseName = Subject.Subject.Course.Name
                     }

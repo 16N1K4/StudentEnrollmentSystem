@@ -10,8 +10,6 @@ namespace StudentEnrollmentAPI.IRepository
         public Task<SignInResult> SignInUserAsync(LoginDTO loginDTO);
         public Task<ApplicationUser> FindUserByEmailAsync(string email);
         public Task<List<StudentSubject>> ViewSchedule(string email);
-        public string ScheduleDay(char code);
-        public string StartTime(char code);
-        public string EndTime(char code);
+        public Task<string> GetUserRole(ApplicationUser user);
     }
 }

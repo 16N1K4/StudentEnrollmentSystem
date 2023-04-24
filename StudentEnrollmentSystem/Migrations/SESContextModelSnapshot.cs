@@ -276,7 +276,7 @@ namespace StudentEnrollmentSystem.Migrations
 
                     b.HasIndex("DeptID");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
 
                     b.HasData(
                         new
@@ -301,7 +301,7 @@ namespace StudentEnrollmentSystem.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
 
                     b.HasData(
                         new
@@ -341,7 +341,7 @@ namespace StudentEnrollmentSystem.Migrations
 
                     b.HasIndex("DeptID");
 
-                    b.ToTable("Faculties");
+                    b.ToTable("Faculties", (string)null);
                 });
 
             modelBuilder.Entity("StudentEnrollmentSystem.Models.Section", b =>
@@ -372,7 +372,7 @@ namespace StudentEnrollmentSystem.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Sections");
+                    b.ToTable("Sections", (string)null);
 
                     b.HasData(
                         new
@@ -821,7 +821,7 @@ namespace StudentEnrollmentSystem.Migrations
 
                     b.HasIndex("SubjectID");
 
-                    b.ToTable("StudentSubjects");
+                    b.ToTable("StudentSubjects", (string)null);
                 });
 
             modelBuilder.Entity("StudentEnrollmentSystem.Models.Subject", b =>
@@ -859,7 +859,7 @@ namespace StudentEnrollmentSystem.Migrations
 
                     b.HasIndex("SectionID");
 
-                    b.ToTable("Subjects");
+                    b.ToTable("Subjects", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

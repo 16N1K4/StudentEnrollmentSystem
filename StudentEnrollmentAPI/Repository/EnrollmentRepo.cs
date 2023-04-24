@@ -35,6 +35,13 @@ namespace StudentEnrollmentAPI.Repository
             return user;
         }
 
+        public async Task<string> GetUserRole(ApplicationUser user)
+        {
+            var roleList = await _userManager.GetRolesAsync(user);
+            string role = roleList.First();
+            return role;
+        }
+
         public async Task<List<StudentSubject>> ViewSchedule(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -45,115 +52,6 @@ namespace StudentEnrollmentAPI.Repository
                 .ToList();
         }
 
-        public string ScheduleDay(char code)
-        {
-            string day = "";
-
-            switch (code)
-            {
-                case 'M':
-                    day = "Monday";
-                    break;
-                case 'T':
-                    day = "Tuesday";
-                    break;
-                case 'W':
-                    day = "Wednesday";
-                    break;
-                case 'H':
-                    day = "Thursday";
-                    break;
-                case 'F':
-                    day = "Friday";
-                    break;
-                case 'S':
-                    day = "Saturday";
-                    break;
-            }
-
-            return day;
-        }
-
-        public string StartTime(char code)
-        {
-            string time = "";
-
-            switch (code)
-            {
-                case 'A':
-                    time = "7:00AM";
-                    break;
-                case 'B':
-                    time = "8:30AM";
-                    break;
-                case 'C':
-                    time = "10:00AM";
-                    break;
-                case 'D':
-                    time = "11:30AM";
-                    break;
-                case 'E':
-                    time = "1:00PM";
-                    break;
-                case 'F':
-                    time = "2:30PM";
-                    break;
-                case 'G':
-                    time = "4:00PM";
-                    break;
-                case 'H':
-                    time = "5:30PM";
-                    break;
-                case 'I':
-                    time = "7:00PM";
-                    break;
-                case 'J':
-                    time = "8:30PM";
-                    break;
-            }
-
-            return time;
-        }
-
-        public string EndTime(char code)
-        {
-            string time = "";
-
-            switch (code)
-            {
-                case 'A':
-                    time = "7:00AM";
-                    break;
-                case 'B':
-                    time = "8:30AM";
-                    break;
-                case 'C':
-                    time = "10:00AM";
-                    break;
-                case 'D':
-                    time = "11:30AM";
-                    break;
-                case 'E':
-                    time = "1:00PM";
-                    break;
-                case 'F':
-                    time = "2:30PM";
-                    break;
-                case 'G':
-                    time = "4:00PM";
-                    break;
-                case 'H':
-                    time = "5:30PM";
-                    break;
-                case 'I':
-                    time = "7:00PM";
-                    break;
-                case 'J':
-                    time = "8:30PM";
-                    break;
-            }
-
-            return time;
-        }
+        
     }
 }

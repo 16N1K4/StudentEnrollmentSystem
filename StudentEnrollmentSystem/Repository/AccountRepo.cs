@@ -16,7 +16,7 @@ namespace StudentEnrollmentSystem.Repository
 
         public List<ApplicationUser> ViewAllStudents()
         {
-            return _context.Users.Where(u => u.CourseID > 0).Include(u => u.Course).ToList();
+            return _context.Users.Where(u => u.CourseID > 0 || u.CourseID == null).Include(u => u.Course).ToList();
         }
 
         public ApplicationUser ViewOneStudent(string id)

@@ -16,7 +16,7 @@ namespace StudentEnrollmentSystem.ViewModels
         [EmailAddress]
         [Remote(action: "VerifyNewEmail", controller: "Account", AdditionalFields = "OldEmail", ErrorMessage = "A user with this email address already exists.")]
         public string NewEmail { get; set; }
-
+        [Required(ErrorMessage = "The 'Course' field is required")]
         public int CourseID { get; set; }
         public Course? Course { get; set; }
     }
