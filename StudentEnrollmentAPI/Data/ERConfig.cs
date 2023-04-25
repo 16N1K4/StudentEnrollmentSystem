@@ -21,13 +21,6 @@ namespace StudentEnrollmentAPI.Data
                 .HasForeignKey(stdsub => stdsub.SubjectID)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            //1 Department to N Faculty
-            builder.Entity<Faculty>()
-                .HasOne<Department>(fac => fac.Department)
-                .WithMany(dept => dept.Faculties)
-                .HasForeignKey(fac => fac.DeptID)
-                .OnDelete(DeleteBehavior.Cascade);
-
             //1 Faculty to N Subject
             builder.Entity<Subject>()
                 .HasOne<Faculty>(sub => sub.Faculty)
