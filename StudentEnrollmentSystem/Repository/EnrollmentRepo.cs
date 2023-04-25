@@ -25,17 +25,57 @@ namespace StudentEnrollmentSystem.Repository
             {
                 SubjectList.Remove(SubjectList.FirstOrDefault(sub => sub.ID == Subject.Subject.ID));
             }
+
+            foreach (Subject sub in SubjectList)
+            {
+                if (sub.SectionID == null)
+                {
+                    sub.SectionID = -1;
+                    _context.Subjects.Update(sub);
+                    _context.SaveChanges();
+                }
+            }
             return SubjectList;
         }
 
         public Subject ViewOneSubject(int id)
         {
-            return _context.Subjects.Include(sub => sub.Faculty).Include(sub => sub.Course).Include(sub => sub.Section).AsNoTracking().FirstOrDefault(sub => sub.ID == id);
+            var Subject = _context.Subjects.Include(sub => sub.Faculty).Include(sub => sub.Course).Include(sub => sub.Section).AsNoTracking().FirstOrDefault(sub => sub.ID == id);
+            if (Subject.SectionID == null)
+            {
+                Subject.SectionID = -1;
+                _context.Subjects.Update(Subject);
+                _context.SaveChanges();
+
+                return Subject;
+            }
+            if (Subject.FacultyID == null)
+            {
+                Subject.FacultyID = -1;
+                _context.Subjects.Update(Subject);
+                _context.SaveChanges();
+
+                return Subject;
+            }
+
+            return Subject;
         }
 
         public List<StudentSubject> ViewSchedule(string id)
         {
-            return _context.StudentSubjects.Where(stdsub => stdsub.StudentID == id).Include(stdsub => stdsub.Subject).Include(stdsub => stdsub.Subject.Faculty).Include(stdsub => stdsub.Subject.Course).Include(stdsub => stdsub.Subject.Section).OrderBy(stdsub => stdsub.Subject.SectionID).ToList();
+            var Schedule = _context.StudentSubjects.Where(stdsub => stdsub.StudentID == id).Include(stdsub => stdsub.Subject).Include(stdsub => stdsub.Subject.Faculty).Include(stdsub => stdsub.Subject.Course).Include(stdsub => stdsub.Subject.Section).OrderBy(stdsub => stdsub.Subject.SectionID).ToList();
+            foreach(var stdsub in Schedule)
+            {
+                var Subject = ViewOneSubject(stdsub.SubjectID);
+                if (Subject.SectionID == null)
+                {
+                    Subject.SectionID = -1;
+                    _context.Subjects.Update(Subject);
+                    _context.SaveChanges();
+                }
+            }
+            
+            return Schedule;
         }
 
         //add subject

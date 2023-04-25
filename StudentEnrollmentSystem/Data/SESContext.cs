@@ -35,9 +35,7 @@ namespace StudentEnrollmentSystem.Data
             builder.SeedSectionCodes();
             builder.ConfigureRelationships();
             builder.SetStudentNumbers();
-
-            builder.Entity<Department>().HasData(new Department { ID = -1, Name = "Admin" });
-            builder.Entity<Course>().HasData(new Course { ID = -1, Name = "Admin", DeptID = -1});
+            builder.AddDefaultValues();
             
             base.OnModelCreating(builder);
         }

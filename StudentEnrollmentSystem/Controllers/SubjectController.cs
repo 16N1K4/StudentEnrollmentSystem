@@ -49,11 +49,21 @@ namespace StudentEnrollmentSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddSubject(Subject NewSubject)
+        public IActionResult AddSubject(SubjectViewModel NewSubject)
         {
             if (ModelState.IsValid)
             {
-                _repo.AddSubject(NewSubject);
+                var NewSub = new Subject
+                {
+                    Name = NewSubject.Name,
+                    Units = NewSubject.Units,
+                    ClassSize = NewSubject.ClassSize,
+                    FacultyID = NewSubject.FacultyID,
+                    SectionID = NewSubject.SectionID,
+                    CourseID = NewSubject.CourseID
+                };
+
+                _repo.AddSubject(NewSub);
                 TempData["SuccessA"] = "Subject successfully added!";
                 return RedirectToAction("ViewAllSubjects");
             }
@@ -65,6 +75,16 @@ namespace StudentEnrollmentSystem.Controllers
         public IActionResult UpdateSubject(int id)
         {
             var Subject = _repo.ViewOneSubject(id);
+            SubjectViewModel SubjectVM = new SubjectViewModel
+            {
+                ID = Subject.ID,
+                Name = Subject.Name,
+                Units = Subject.Units,
+                ClassSize = Subject.ClassSize,
+                FacultyID = Subject.FacultyID,
+                SectionID = Subject.SectionID,
+                CourseID = Subject.CourseID
+            };
             var courses = _repo.FetchCourseList();
             var faculty = _repo.FetchFacultyList();
             var sections = _repo.FetchSectionList();
@@ -73,7 +93,7 @@ namespace StudentEnrollmentSystem.Controllers
             ViewBag.Faculty = faculty;
             ViewBag.Sections = sections;
 
-            return View(Subject);
+            return View(SubjectVM);
         }
 
         [HttpPost]
@@ -81,7 +101,17 @@ namespace StudentEnrollmentSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                _repo.UpdateSubject(NewSubject);
+                var NewSub = new Subject
+                {
+                    ID = NewSubject.ID,
+                    Name = NewSubject.Name,
+                    Units = NewSubject.Units,
+                    ClassSize = NewSubject.ClassSize,
+                    FacultyID = NewSubject.FacultyID,
+                    SectionID = NewSubject.SectionID,
+                    CourseID = NewSubject.CourseID
+                };
+                _repo.UpdateSubject(NewSub);
                 TempData["SuccessB"] = "Subject successfully updated!";
                 return RedirectToAction("ViewAllSubjects");
             }

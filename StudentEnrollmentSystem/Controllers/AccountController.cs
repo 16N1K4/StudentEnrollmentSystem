@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StudentEnrollmentSystem.IRepository;
 using StudentEnrollmentSystem.Models;
 using StudentEnrollmentSystem.ViewModels;
@@ -32,9 +33,16 @@ namespace StudentEnrollmentSystem.Controllers
             return View(StudentList);
         }
 
-        public IActionResult ViewOneStudent(string id)
+        public async Task<IActionResult> ViewOneStudent(string id)
         {
             var Student = _accountRepo.ViewOneStudent(id);
+            if (Student.CourseID == null)
+            {
+                var user = await _userManager.FindByEmailAsync(Student.UserName);
+                user.CourseID = -2;
+                var result = await _userManager.UpdateAsync(user);
+            }
+            Student = _accountRepo.ViewOneStudent(Student.Id);
             return View(Student);
         }
 
@@ -104,7 +112,7 @@ namespace StudentEnrollmentSystem.Controllers
                 LastName = Student.LastName,
                 OldEmail = Student.Email,
                 NewEmail = Student.Email,
-                CourseID = Student.CourseID
+                CourseID = Student.CourseID.Value
             };
             var CourseList = _courseRepo.ViewAllCourses();
             ViewBag.Courses = CourseList;

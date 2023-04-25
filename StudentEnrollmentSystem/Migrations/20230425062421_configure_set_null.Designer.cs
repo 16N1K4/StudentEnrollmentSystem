@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentEnrollmentSystem.Data;
 
@@ -11,9 +12,10 @@ using StudentEnrollmentSystem.Data;
 namespace StudentEnrollmentSystem.Migrations
 {
     [DbContext(typeof(SESContext))]
-    partial class SESContextModelSnapshot : ModelSnapshot
+    [Migration("20230425062421_configure_set_null")]
+    partial class configure_set_null
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,15 +56,15 @@ namespace StudentEnrollmentSystem.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1d6e01a5-4066-4d51-a6ea-0669e6990547",
-                            ConcurrencyStamp = "e72b7274-ff39-40ff-b9cf-80d4f4decb2a",
+                            Id = "e7d10545-21f0-4af5-906c-e51d4ff51f68",
+                            ConcurrencyStamp = "d05bec7b-54f2-44ac-813a-a8409bd8724c",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "ae586af2-de59-4f8d-9ad5-b530efe802f7",
-                            ConcurrencyStamp = "95b3c4f7-6bbd-4933-9aac-627bfa31daef",
+                            Id = "692c5135-002f-4bdc-be5a-0237ececf1a4",
+                            ConcurrencyStamp = "ae1cac08-7f1b-46e0-bb92-e28de1209606",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         });
@@ -325,7 +327,7 @@ namespace StudentEnrollmentSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int?>("DepartmentID")
+                    b.Property<int>("DeptID")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -345,7 +347,7 @@ namespace StudentEnrollmentSystem.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("DepartmentID");
+                    b.HasIndex("DeptID");
 
                     b.ToTable("Faculties");
 
@@ -353,6 +355,7 @@ namespace StudentEnrollmentSystem.Migrations
                         new
                         {
                             ID = -1,
+                            DeptID = -1,
                             Email = "",
                             FirstName = "NULL",
                             LastName = ""
@@ -960,9 +963,13 @@ namespace StudentEnrollmentSystem.Migrations
 
             modelBuilder.Entity("StudentEnrollmentSystem.Models.Faculty", b =>
                 {
-                    b.HasOne("StudentEnrollmentSystem.Models.Department", null)
+                    b.HasOne("StudentEnrollmentSystem.Models.Department", "Department")
                         .WithMany("Faculties")
-                        .HasForeignKey("DepartmentID");
+                        .HasForeignKey("DeptID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("StudentEnrollmentSystem.Models.StudentSubject", b =>
@@ -994,8 +1001,7 @@ namespace StudentEnrollmentSystem.Migrations
 
                     b.HasOne("StudentEnrollmentSystem.Models.Faculty", "Faculty")
                         .WithMany("Subjects")
-                        .HasForeignKey("FacultyID")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("FacultyID");
 
                     b.HasOne("StudentEnrollmentSystem.Models.Section", "Section")
                         .WithMany("Subjects")

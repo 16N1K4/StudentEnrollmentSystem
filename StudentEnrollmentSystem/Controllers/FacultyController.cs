@@ -35,9 +35,6 @@ namespace StudentEnrollmentSystem.Controllers
         [HttpGet]
         public IActionResult AddFaculty()
         {
-            var DeptList = _repo.FetchDepartmentList();
-            ViewBag.Departments = DeptList;
-
             return View();
         }
 
@@ -59,8 +56,6 @@ namespace StudentEnrollmentSystem.Controllers
         public IActionResult UpdateFaculty(int id)
         {
             var Faculty = _repo.ViewOneFaculty(id);
-            var DeptList = _repo.FetchDepartmentList();
-            ViewBag.Departments = DeptList;
 
             return View(Faculty);
         }

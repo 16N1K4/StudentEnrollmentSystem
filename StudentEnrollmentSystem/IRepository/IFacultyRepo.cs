@@ -9,6 +9,5 @@ namespace StudentEnrollmentSystem.IRepository
         public Faculty AddFaculty(Faculty NewFaculty);
         public Faculty UpdateFaculty(Faculty NewFaculty);
         public Faculty DeleteFaculty(int id);
-        public List<Department> FetchDepartmentList();
     }
 }

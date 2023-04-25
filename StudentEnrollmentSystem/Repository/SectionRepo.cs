@@ -18,7 +18,7 @@ namespace StudentEnrollmentSystem.Repository
 
         public List<Section> ViewAllSections()
         {
-            return _context.Sections.ToList();
+            return _context.Sections.Where(sec => sec.ID > 0).ToList();
         }
 
         public Section ViewOneSection(int id)

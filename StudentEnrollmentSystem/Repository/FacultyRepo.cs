@@ -16,12 +16,12 @@ namespace StudentEnrollmentSystem.Repository
 
         public List<Faculty> ViewAllFaculty()
         {
-            return _context.Faculties.Include(fac => fac.Department).ToList();
+            return _context.Faculties.Where(fac => fac.ID > 0).ToList();
         }
 
         public Faculty ViewOneFaculty(int id)
         {
-            return _context.Faculties.Include(fac => fac.Department).AsNoTracking().FirstOrDefault(fac => fac.ID == id);
+            return _context.Faculties.AsNoTracking().FirstOrDefault(fac => fac.ID == id);
         }
 
         public Faculty AddFaculty(Faculty NewFaculty)
@@ -52,11 +52,6 @@ namespace StudentEnrollmentSystem.Repository
             }
 
             return null;
-        }
-
-        public List<Department> FetchDepartmentList()
-        {
-            return _context.Departments.Where(dept => dept.ID >0 ).ToList();
         }
     }
 }

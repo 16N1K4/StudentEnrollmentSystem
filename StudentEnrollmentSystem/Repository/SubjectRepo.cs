@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using StudentEnrollmentSystem.Data;
 using StudentEnrollmentSystem.IRepository;
 using StudentEnrollmentSystem.Models;
@@ -18,12 +19,36 @@ namespace StudentEnrollmentSystem.Repository
 
         public List<Subject> ViewAllSubjects()
         {
-            return _context.Subjects.Include(sub => sub.Faculty).Include(sub => sub.Course).Include(sub => sub.Section).ToList();
+            var SubjectList = _context.Subjects.Include(sub => sub.Faculty).Include(sub => sub.Course).Include(sub => sub.Section).ToList();
+            foreach (Subject sub in SubjectList)
+            {
+                if (sub.SectionID == null)
+                {
+                    sub.SectionID = -1;
+                    _context.Subjects.Update(sub);
+                    _context.SaveChanges();
+                }
+            }
+
+            return SubjectList;
         }
 
         public Subject ViewOneSubject(int id)
         {
-            return _context.Subjects.Include(sub => sub.Faculty).Include(sub => sub.Course).Include(sub => sub.Section).AsNoTracking().FirstOrDefault(sub => sub.ID == id);
+            var Subject = _context.Subjects.Include(sub => sub.Faculty).Include(sub => sub.Course).Include(sub => sub.Section).AsNoTracking().FirstOrDefault(sub => sub.ID == id);
+            if (Subject.SectionID == null)
+            {
+                Subject.SectionID = -1;
+                _context.Subjects.Update(Subject);
+            }
+            if (Subject.FacultyID == null)
+            {
+                Subject.FacultyID = -1;
+                _context.Subjects.Update(Subject);
+            }
+
+            _context.SaveChanges();
+            return Subject;
         }
 
         public Subject AddSubject(Subject NewSubject)
@@ -66,7 +91,7 @@ namespace StudentEnrollmentSystem.Repository
 
         public List<Faculty> FetchFacultyList()
         {
-            return _context.Faculties.ToList();
+            return _context.Faculties.Where(fac => fac.ID > 0).ToList();
         }
 
         public List<Course> FetchCourseList()
@@ -76,7 +101,7 @@ namespace StudentEnrollmentSystem.Repository
 
         public List<Section> FetchSectionList()
         {
-            return _context.Sections.ToList();
+            return _context.Sections.Where(sec => sec.ID > 0).ToList();
         }
 
         #endregion

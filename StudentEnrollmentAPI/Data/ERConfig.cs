@@ -33,14 +33,14 @@ namespace StudentEnrollmentAPI.Data
                 .HasOne<Faculty>(sub => sub.Faculty)
                 .WithMany(fac => fac.Subjects)
                 .HasForeignKey(sub => sub.FacultyID)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
 
             //1 Course to N Student (ApplicationUser)
             builder.Entity<ApplicationUser>()
                 .HasOne<Course>(std => std.Course)
                 .WithMany(crs => crs.Students)
                 .HasForeignKey(std => std.CourseID)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
 
             //1 Course to N Subject
             builder.Entity<Subject>()
@@ -61,7 +61,7 @@ namespace StudentEnrollmentAPI.Data
                 .HasOne<Section>(sub => sub.Section)
                 .WithMany(sec => sec.Subjects)
                 .HasForeignKey(sub => sub.SectionID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

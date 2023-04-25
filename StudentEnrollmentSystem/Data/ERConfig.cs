@@ -21,26 +21,19 @@ namespace StudentEnrollmentSystem.Data
                 .HasForeignKey(stdsub => stdsub.SubjectID)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            //1 Department to N Faculty
-            builder.Entity<Faculty>()
-                .HasOne<Department>(fac => fac.Department)
-                .WithMany(dept => dept.Faculties)
-                .HasForeignKey(fac => fac.DeptID)
-                .OnDelete(DeleteBehavior.Cascade);
-
             //1 Faculty to N Subject
             builder.Entity<Subject>()
                 .HasOne<Faculty>(sub => sub.Faculty)
                 .WithMany(fac => fac.Subjects)
                 .HasForeignKey(sub => sub.FacultyID)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
 
             //1 Course to N Student (ApplicationUser)
             builder.Entity<ApplicationUser>()
                 .HasOne<Course>(std => std.Course)
                 .WithMany(crs => crs.Students)
                 .HasForeignKey(std => std.CourseID)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
 
             //1 Course to N Subject
             builder.Entity<Subject>()
@@ -61,7 +54,7 @@ namespace StudentEnrollmentSystem.Data
                 .HasOne<Section>(sub => sub.Section)
                 .WithMany(sec => sec.Subjects)
                 .HasForeignKey(sub => sub.SectionID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

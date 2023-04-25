@@ -41,7 +41,6 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">Department</th>
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -53,7 +52,6 @@
             <tr>
                 <th scope="row">@Fac.ID</th>
                 <td>@Fac.FirstName @Fac.LastName</td>
-                <td>@Fac.Department.Name</td>
                 <td><a class="btn btn-primary" asp-controller="Faculty" asp-action="ViewOneFaculty" asp-route-id="@Fac.ID"><i class="bi bi-eye"></i> View</a></td>
                 <td><a class="btn btn-warning" asp-controller="Faculty" asp-action="UpdateFaculty" asp-route-id="@Fac.ID"><i class="bi bi-pencil-square"></i> Edit</a></td>
                 <td><a class="btn btn-danger" asp-controller="Faculty" asp-action="DeleteFaculty" asp-route-id="@Fac.ID"><i class="bi bi-trash"></i> Delete</a></td>
