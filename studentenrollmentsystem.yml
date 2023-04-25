@@ -117,7 +117,7 @@ spec:
     spec:
       containers:
         - name: studentenrollmentsystem
-          image: 16n1k4/studentenrollmentsystem:v35
+          image: 16n1k4/studentenrollmentsystem:v36
           imagePullPolicy: Always
           ports:
             - containerPort: 80
