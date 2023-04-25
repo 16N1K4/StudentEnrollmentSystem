@@ -22,6 +22,7 @@ namespace StudentEnrollmentSystem.Repository
             var SubjectList = _context.Subjects.Include(sub => sub.Faculty).Include(sub => sub.Course).Include(sub => sub.Section).ToList();
             foreach (Subject sub in SubjectList)
             {
+                //check for null values
                 if (sub.SectionID == null)
                 {
                     sub.SectionID = -1;
@@ -36,6 +37,8 @@ namespace StudentEnrollmentSystem.Repository
         public Subject ViewOneSubject(int id)
         {
             var Subject = _context.Subjects.Include(sub => sub.Faculty).Include(sub => sub.Course).Include(sub => sub.Section).AsNoTracking().FirstOrDefault(sub => sub.ID == id);
+
+            //check for null values
             if (Subject.SectionID == null)
             {
                 Subject.SectionID = -1;
@@ -63,6 +66,7 @@ namespace StudentEnrollmentSystem.Repository
         {
             _context.Subjects.Update(NewSubject);
             var EnrolledList = _context.StudentSubjects.ToList();
+            //force drop updated subjects
             foreach(StudentSubject stdsub in EnrolledList)
             {
                 if(stdsub.SubjectID == NewSubject.ID)

@@ -26,6 +26,7 @@ namespace StudentEnrollmentSystem.Repository
                 SubjectList.Remove(SubjectList.FirstOrDefault(sub => sub.ID == Subject.Subject.ID));
             }
 
+            //check for null values
             foreach (Subject sub in SubjectList)
             {
                 if (sub.SectionID == null)
@@ -41,6 +42,8 @@ namespace StudentEnrollmentSystem.Repository
         public Subject ViewOneSubject(int id)
         {
             var Subject = _context.Subjects.Include(sub => sub.Faculty).Include(sub => sub.Course).Include(sub => sub.Section).AsNoTracking().FirstOrDefault(sub => sub.ID == id);
+
+            //check for null values
             if (Subject.SectionID == null)
             {
                 Subject.SectionID = -1;
@@ -64,7 +67,8 @@ namespace StudentEnrollmentSystem.Repository
         public List<StudentSubject> ViewSchedule(string id)
         {
             var Schedule = _context.StudentSubjects.Where(stdsub => stdsub.StudentID == id).Include(stdsub => stdsub.Subject).Include(stdsub => stdsub.Subject.Faculty).Include(stdsub => stdsub.Subject.Course).Include(stdsub => stdsub.Subject.Section).OrderBy(stdsub => stdsub.Subject.SectionID).ToList();
-            foreach(var stdsub in Schedule)
+            //check for null values
+            foreach (var stdsub in Schedule)
             {
                 var Subject = ViewOneSubject(stdsub.SubjectID);
                 if (Subject.SectionID == null)

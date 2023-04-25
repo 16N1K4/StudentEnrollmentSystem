@@ -17,11 +17,5 @@ namespace StudentEnrollmentAPI.Models
         {
 
         }
-
-        public Section(int id, string sectionCode)
-        {
-            ID = id;
-            SectionCode = sectionCode;
-        }
     }
 }

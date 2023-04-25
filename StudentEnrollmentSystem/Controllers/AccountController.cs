@@ -37,6 +37,8 @@ namespace StudentEnrollmentSystem.Controllers
         public async Task<IActionResult> ViewOneStudent(string id)
         {
             var Student = _accountRepo.ViewOneStudent(id);
+
+            //check for null values
             if (Student.CourseID == null)
             {
                 var user = await _userManager.FindByEmailAsync(Student.UserName);

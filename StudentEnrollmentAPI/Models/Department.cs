@@ -16,11 +16,5 @@ namespace StudentEnrollmentAPI.Models
         {
 
         }
-
-        public Department(int id, string name)
-        {
-            ID = id;
-            Name = name;
-        }
     }
 }

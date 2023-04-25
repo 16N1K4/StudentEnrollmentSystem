@@ -32,16 +32,5 @@ namespace StudentEnrollmentAPI.Models
         {
 
         }
-
-        public Subject(int id, string name, int units, int classSize, int sectionID, int courseID, int facultyID)
-        {
-            ID = id;
-            Name = name;
-            Units = units;
-            ClassSize = classSize;
-            SectionID = sectionID;
-            CourseID = courseID;
-            FacultyID = facultyID;
-        }
     }
 }

@@ -15,6 +15,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+//configure JWT
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo { Title = "StudentEnrollmentAPI", Version = "v1" });
@@ -45,15 +47,18 @@ builder.Services.AddSwaggerGen(opt =>
 }
     );
 
+//DB-related dependency injections
 builder.Services.AddDbContext<SESContext>();
 builder.Services.AddScoped<SESContext, SESContext>();
 builder.Services.AddScoped<ISubjectRepo, SubjectRepo>();
 builder.Services.AddScoped<IEnrollmentRepo, EnrollmentRepo>();
 
+//JWT variables
 var issuer = builder.Configuration["JWT:Issuer"];
 var audience = builder.Configuration["JWT:Audience"];
 var key = builder.Configuration["JWT:Key"];
 
+//add JWT authentication
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -73,6 +78,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+//identity framework
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<SESContext>()
     .AddDefaultTokenProviders();

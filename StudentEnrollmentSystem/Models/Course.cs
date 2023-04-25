@@ -19,12 +19,5 @@ namespace StudentEnrollmentSystem.Models
         {
 
         }
-
-        public Course(int id, string name, int deptID)
-        {
-            ID = id;
-            Name = name;
-            DeptID = deptID;
-        }
     }
 }
