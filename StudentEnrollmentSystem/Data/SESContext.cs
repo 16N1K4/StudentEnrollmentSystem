@@ -21,7 +21,7 @@ namespace StudentEnrollmentSystem.Data
             var username = _config.GetConnectionString("UserName");
             var password = _config.GetConnectionString("Password");
 
-            string ConnectionString = $"Server={server};Database={DB};User Id={username};Password={password};MultipleActiveResultSets=true;Integrated Security=true";
+            string ConnectionString = $"Server={server};Database={DB};User Id={username};Password={password};MultipleActiveResultSets=true";
 
             builder.UseSqlServer(ConnectionString).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 

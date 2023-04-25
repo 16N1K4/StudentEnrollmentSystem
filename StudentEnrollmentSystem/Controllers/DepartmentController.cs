@@ -9,6 +9,7 @@ using System.Data;
 namespace StudentEnrollmentSystem.Controllers
 {
     [Authorize(Roles = "Administrator")]
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     public class DepartmentController : Controller
     {
         IDepartmentRepo _repo;

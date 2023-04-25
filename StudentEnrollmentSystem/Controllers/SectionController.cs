@@ -7,6 +7,7 @@ using StudentEnrollmentSystem.ViewModels;
 namespace StudentEnrollmentSystem.Controllers
 {
     [Authorize(Roles = "Administrator")]
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     public class SectionController : Controller
     {
         ISectionRepo _repo;

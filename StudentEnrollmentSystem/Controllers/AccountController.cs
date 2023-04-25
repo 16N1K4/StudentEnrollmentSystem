@@ -9,6 +9,7 @@ using StudentEnrollmentSystem.ViewModels;
 namespace StudentEnrollmentSystem.Controllers
 {
     [Authorize(Roles = "Administrator")]
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     public class AccountController : Controller
     {
         private UserManager<ApplicationUser> _userManager { get; }
@@ -217,6 +218,12 @@ namespace StudentEnrollmentSystem.Controllers
         public IActionResult Login()
         {
             TempData["Unauthorized"] = "You must be logged in to access this page.";
+            return RedirectToAction("Login", "Home");
+        }
+
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
             return RedirectToAction("Login", "Home");
         }
     }

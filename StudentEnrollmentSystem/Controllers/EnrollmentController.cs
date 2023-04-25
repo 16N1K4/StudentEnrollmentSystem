@@ -9,6 +9,7 @@ using System.Security.Claims;
 namespace StudentEnrollmentSystem.Controllers
 {
     [Authorize(Roles = "Student")]
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     public class EnrollmentController : Controller
     {
         IEnrollmentRepo _repo;
