@@ -8,5 +8,7 @@ namespace StudentEnrollmentAPI.IRepository
         public List<Subject> ViewSubjectsByCourse(int courseID);
         public List<Subject> ViewSubjectsBySchedule(string sectionCode);
         public Subject ViewOneSubject(int id);
+        public bool SectionCodeExists(string sectionCode);
+        public bool CourseExists(int id);
     }
 }

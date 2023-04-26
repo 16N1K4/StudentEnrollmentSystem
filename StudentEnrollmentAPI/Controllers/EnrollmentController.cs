@@ -63,7 +63,12 @@ namespace StudentEnrollmentAPI.Controllers
         [HttpGet("{email}")]
         public async Task<IActionResult> ViewSchedule([FromRoute] string email)
         {
-            var SubjectList = await _repo.ViewSchedule(email); ;
+            var User = await _repo.FindUserByEmailAsync(email);
+            if(User == null)
+            {
+                return NotFound();
+            }
+            var SubjectList = await _repo.ViewSchedule(email);
             List<ScheduleDTO> Schedule = new List<ScheduleDTO>();
             foreach (var Subject in SubjectList)
             {
@@ -93,7 +98,7 @@ namespace StudentEnrollmentAPI.Controllers
         [HttpGet("self")]
         public async Task<IActionResult> ViewOwnSchedule()
         {
-            var SubjectList = await _repo.ViewSchedule(User.Identity.Name); ;
+            var SubjectList = await _repo.ViewSchedule(User.Identity.Name);
             List<ScheduleDTO> Schedule = new List<ScheduleDTO>();
             foreach (var Subject in SubjectList)
             {

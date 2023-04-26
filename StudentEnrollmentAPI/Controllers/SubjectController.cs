@@ -46,6 +46,10 @@ namespace StudentEnrollmentAPI.Controllers
         [HttpGet("ByCourse/{courseID}")]
         public IActionResult ViewSubjectsByCourse([FromRoute] int courseID)
         {
+            if (!_repo.CourseExists(courseID))
+            {
+                return NotFound();
+            }
             var SubjectList = _repo.ViewSubjectsByCourse(courseID);
             List<SubjectDTO> SubjectDTOList = new List<SubjectDTO>();
             foreach (var Subject in SubjectList)
@@ -73,6 +77,10 @@ namespace StudentEnrollmentAPI.Controllers
         [HttpGet("BySchedule/{sectionCode}")]
         public IActionResult ViewSubjectsBySchedule([FromRoute] string sectionCode)
         {
+            if (!_repo.SectionCodeExists(sectionCode))
+            {
+                return NotFound();
+            }
             var SubjectList = _repo.ViewSubjectsBySchedule(sectionCode);
             List<SubjectDTO> SubjectDTOList = new List<SubjectDTO>();
             foreach (var Subject in SubjectList)
@@ -101,6 +109,10 @@ namespace StudentEnrollmentAPI.Controllers
         public IActionResult ViewOneSubject([FromRoute] int id)
         {
             var Subject = _repo.ViewOneSubject(id);
+            if(Subject == null)
+            {
+                return NotFound();
+            }
             SubjectDTO subjectDTO = new SubjectDTO
             {
                 ID = Subject.ID,

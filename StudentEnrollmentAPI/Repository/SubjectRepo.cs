@@ -34,5 +34,30 @@ namespace StudentEnrollmentAPI.Repository
             return _context.Subjects.Include(sub => sub.Section).Include(sub => sub.Course).Include(sub => sub.Faculty).FirstOrDefault(sub => sub.ID == id);
         }
 
+        public bool SectionCodeExists(string sectionCode)
+        {
+            var SectionList = _context.Sections.ToList();
+            foreach (var section in SectionList)
+            {
+                if(section.SectionCode == sectionCode)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool CourseExists(int id)
+        {
+            var CourseList = _context.Courses.ToList();
+            foreach (var course in CourseList)
+            {
+                if(course.ID == id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
