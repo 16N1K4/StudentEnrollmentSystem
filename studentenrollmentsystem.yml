@@ -67,7 +67,7 @@ spec:
     spec:
       containers:
         - name: studentenrollmentapi
-          image: 16n1k4/studentenrollmentapi:v4
+          image: 16n1k4/studentenrollmentapi:v5
           imagePullPolicy: Always
           ports:
             - containerPort: 80
@@ -117,7 +117,7 @@ spec:
     spec:
       containers:
         - name: studentenrollmentsystem
-          image: 16n1k4/studentenrollmentsystem:v37
+          image: 16n1k4/studentenrollmentsystem:v38
           imagePullPolicy: Always
           ports:
             - containerPort: 80
