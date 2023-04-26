@@ -29,6 +29,12 @@ namespace StudentEnrollmentSystem.Repository
                     _context.Subjects.Update(sub);
                     _context.SaveChanges();
                 }
+                if (sub.FacultyID == null)
+                {
+                    sub.FacultyID = -1;
+                    _context.Subjects.Update(sub);
+                    _context.SaveChanges();
+                }
             }
 
             return SubjectList;

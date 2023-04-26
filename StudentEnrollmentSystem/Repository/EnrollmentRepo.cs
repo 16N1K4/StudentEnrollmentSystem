@@ -19,9 +19,12 @@ namespace StudentEnrollmentSystem.Repository
 
         public List<Subject> ViewAllSubjects(string id)
         {
-            List<Subject> SubjectList = _context.Subjects.Where(sub => sub.Students.Count < sub.ClassSize).Include(sub => sub.Faculty).Include(sub => sub.Course).Include(sub => sub.Section).ToList();
+            List<Subject> SubjectList = _context.Subjects.Where(sub => sub.SectionID > 0 || sub.SectionID == null)
+                .Include(sub => sub.Faculty).Include(sub => sub.Course).Include(sub => sub.Section).ToList();
+
+            //remove classes already added to schedule
             var Schedule = ViewSchedule(id);
-            foreach(var Subject in Schedule)
+            foreach (var Subject in Schedule)
             {
                 SubjectList.Remove(SubjectList.FirstOrDefault(sub => sub.ID == Subject.Subject.ID));
             }
@@ -36,6 +39,7 @@ namespace StudentEnrollmentSystem.Repository
                     _context.SaveChanges();
                 }
             }
+
             return SubjectList;
         }
 
@@ -132,6 +136,28 @@ namespace StudentEnrollmentSystem.Repository
                 {
                     return true;
                 }
+            }
+
+            return false;
+        }
+
+        public bool ClassIsFull(int SubjectID)
+        {
+            var SubjectToAdd = ViewOneSubject(SubjectID);
+            var EnrolledList = _context.StudentSubjects.ToList();
+
+            int counter = 0;
+            foreach (var stdsub in EnrolledList)
+            {
+                if (SubjectToAdd.ID == stdsub.SubjectID)
+                {
+                    counter++;
+                }
+            }
+
+            if (counter >= SubjectToAdd.ClassSize)
+            {
+                return true;
             }
 
             return false;

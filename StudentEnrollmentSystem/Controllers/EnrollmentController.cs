@@ -57,6 +57,11 @@ namespace StudentEnrollmentSystem.Controllers
                     TempData["FailA"] = "The class you're trying to add has a schedule conflict with a class you've already added.";
                     return RedirectToAction("ViewAllSubjects");
                 }
+                if (_repo.ClassIsFull(SubjectID))
+                {
+                    TempData["FailC"] = "The class you're trying to add already has the maximum number of students.";
+                    return RedirectToAction("ViewAllSubjects");
+                }
 
                 _repo.EnrollSubject(StudentID, SubjectID);
 

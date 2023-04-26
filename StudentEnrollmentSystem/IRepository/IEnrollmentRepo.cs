@@ -10,5 +10,6 @@ namespace StudentEnrollmentSystem.IRepository
         public StudentSubject EnrollSubject(string StudentID, int CourseID);
         public StudentSubject DropSubject(string StudentID, int SubjectID);
         public bool ScheduleConflict(string StudentID, int SubjectID);
+        public bool ClassIsFull(int SubjectID);
     }
 }

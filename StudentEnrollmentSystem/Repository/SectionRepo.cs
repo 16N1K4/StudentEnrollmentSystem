@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using StudentEnrollmentSystem.Data;
 using StudentEnrollmentSystem.IRepository;
@@ -49,6 +50,16 @@ namespace StudentEnrollmentSystem.Repository
             {
                 _context.Sections.Remove(OldSection);
                 _context.SaveChanges();
+
+                //replace null sections in subjects with placeholders
+                var SubjectList = _context.Subjects.Where(sub => sub.SectionID == null).ToList();
+
+                foreach (var Subject in SubjectList)
+                {
+                    Subject.SectionID = -1;
+                    _context.Subjects.Update(Subject);
+                    _context.SaveChanges();
+                }
                 return OldSection;
             }
 
