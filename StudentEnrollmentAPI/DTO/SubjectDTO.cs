@@ -16,6 +16,7 @@ namespace StudentEnrollmentAPI.DTO
         [Required]
         [Range(15, 40)]
         public int ClassSize { get; set; }
+        public int StudentCount { get; set; }
 
         public string SectionCode { get; set; }
         public string ScheduleDay { get; set; }

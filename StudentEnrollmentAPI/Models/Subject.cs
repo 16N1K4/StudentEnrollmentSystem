@@ -17,6 +17,7 @@ namespace StudentEnrollmentAPI.Models
         [Required]
         [Range(15, 40)]
         public int ClassSize { get; set; }
+        public int StudentCount { get; set; }
 
         public int SectionID { get; set; }
         public Section? Section { get; set; }

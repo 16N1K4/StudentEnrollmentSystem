@@ -19,6 +19,7 @@ namespace StudentEnrollmentSystem.Models
         [Required(ErrorMessage = "The 'Class Size' field is required")]
         [Range(15, 40, ErrorMessage = "There must be a minimum of 15 slots and a maximum of 40 slots")]
         public int ClassSize { get; set; }
+        public int StudentCount { get; set; }
         public int? SectionID { get; set; }
         public Section? Section { get; set; }
 

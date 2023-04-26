@@ -40,5 +40,16 @@
             <th scope="col">Schedule</th>
             <td>@Model.Section.FullSchedule</td>
         </tr>
+        <tr>
+            <th scope="col">Schedule</th>
+            <td>@Model.Section.FullSchedule</td>
+        </tr>
+        @{
+            int AvailableSlots = Model.ClassSize - Model.StudentCount;
+        }
+        <tr>
+            <th scope="col">Available Slots</th>
+            <td>@AvailableSlots</td>
+        </tr>
     </tbody>
 </table>

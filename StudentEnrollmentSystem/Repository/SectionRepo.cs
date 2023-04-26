@@ -38,6 +38,15 @@ namespace StudentEnrollmentSystem.Repository
         public Section UpdateSection(Section NewSection)
         {
             _context.Sections.Update(NewSection);
+            var EnrolledList = _context.StudentSubjects.Include(stdsub => stdsub.Subject).Include(stdsub => stdsub.Subject.Section).ToList();
+            //force drop subjects with updated section
+            foreach (StudentSubject stdsub in EnrolledList)
+            {
+                if (stdsub.Subject.SectionID == NewSection.ID)
+                {
+                    _context.StudentSubjects.Remove(stdsub);
+                }
+            }
             _context.SaveChanges();
 
             return NewSection;

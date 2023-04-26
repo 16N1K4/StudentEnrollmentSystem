@@ -37,6 +37,7 @@
             <th scope="col">Course</th>
             <th scope="col">Section</th>
             <th scope="col">Schedule</th>
+            <th scope="col">Available Slots</th>
             <th scope="col"></th>
             <th scope="col"></th>
         </tr>
@@ -44,12 +45,14 @@
     <tbody>
         @foreach (var Sub in Model)
         {
+            int AvailableSlots = Sub.ClassSize - Sub.StudentCount;
             <tr>
                 <th scope="row">@Sub.ID</th>
                 <td>@Sub.Name</td>
                 <td>@Sub.Course.Name</td>
                 <td>@Sub.Section.SectionCode</td>
                 <td>@Sub.Section.FullSchedule</td>
+                <td>@AvailableSlots</td>
                 <td><a class="btn btn-primary" asp-controller="Enrollment" asp-action="ViewOneSubject" asp-route-id="@Sub.ID"><i class="bi bi-eye"></i> View</a></td>
                 <td><a class="btn btn-success" asp-controller="Enrollment" asp-action="EnrollSubject" asp-route-studentID="@ViewBag.StudentID" asp-route-subjectID="@Sub.ID"><i class="bi bi-plus-circle"></i> Add Class</a></td>
             </tr>
