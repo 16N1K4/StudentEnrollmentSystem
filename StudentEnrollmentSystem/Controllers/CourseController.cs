@@ -81,10 +81,9 @@ namespace StudentEnrollmentSystem.Controllers
         [HttpGet]
         public IActionResult DeleteCourse(int id)
         {
-            var Course = _repo.ViewOneCourse(id);
             DeleteEntryViewModel ToDelete = new DeleteEntryViewModel
             {
-                ID = Course.ID
+                ID = id
             };
 
             return View(ToDelete);

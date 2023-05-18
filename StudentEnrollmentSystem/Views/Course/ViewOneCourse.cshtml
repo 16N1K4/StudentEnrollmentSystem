@@ -1,4 +1,5 @@
-﻿@model Course
+﻿@using StudentEnrollmentSystem.ViewModels
+@model CourseViewModel
 
 <h3 align ="center">Course Details</h3>
 <a class="btn btn-info" asp-controller="Course" asp-action="ViewAllCourses" class="btn btn-info"><i class="bi bi-box-arrow-left"></i> Back to list</a>
@@ -17,7 +18,7 @@
         </tr>
         <tr>
             <th scope="col">Department</th>
-            <td>@Model.Department.Name</td>
+            <td>@Model.DeptName</td>
         </tr>
     </tbody>
 </table>

@@ -16,7 +16,8 @@ namespace StudentEnrollmentSystem.Repository
 
         public List<Department> ViewAllDepartments()
         {
-            return _context.Departments.Where(dept => dept.ID > 0).ToList();
+            //return _context.Departments.Where(dept => dept.ID > 0).ToList();
+            return _context.Departments.FromSqlRaw("EXEC view_all_depts").ToList();
         }
 
         public Department ViewOneDepartment(int id)

@@ -2,27 +2,56 @@
 using StudentEnrollmentSystem.Data;
 using StudentEnrollmentSystem.IRepository;
 using StudentEnrollmentSystem.Models;
+using Newtonsoft.Json;
 using System.Linq;
+using System.Net;
+using StudentEnrollmentSystem.ViewModels;
 
 namespace StudentEnrollmentSystem.Repository
 {
     public class CourseRepo : ICourseRepo
     {
         SESContext _context;
+        IConfiguration _config;
+        string baseURL = "http://localhost:5010/api/v1";
+        HttpClient client = new HttpClient();
 
-        public CourseRepo(SESContext context)
+        public CourseRepo(SESContext context, IConfiguration config)
         {
             _context = context;
+            _config = config;
+            client.DefaultRequestHeaders.Add("ApiKey", _config.GetValue<string>("ApiKey"));
         }
 
         public List<Course> ViewAllCourses()
         {
-            return _context.Courses.Where(crs => crs.ID > 0).Include(crs => crs.Department).ToList();
+            var response = client.GetAsync(baseURL + "/course").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var content = response.Content.ReadAsStringAsync().Result;
+                List<Course> courses = JsonConvert.DeserializeObject<List<Course>>(content);
+                return courses;
+            }
+
+            return null;
+            //return _context.Courses.Where(crs => crs.ID > 0).Include(crs => crs.Department).ToList();
         }
 
-        public Course ViewOneCourse(int id)
+        public CourseViewModel ViewOneCourse(int id)
         {
-            return _context.Courses.Include(crs => crs.Department).AsNoTracking().FirstOrDefault(crs => crs.ID == id);
+            var response = client.GetAsync(baseURL + "/course/" + id).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var content = response.Content.ReadAsStringAsync().Result;
+                CourseViewModel crs = JsonConvert.DeserializeObject<CourseViewModel>(content);
+                if (content != null)
+                {
+                    return crs;
+                }
+            }
+
+            return null;
+            //return _context.Courses.Include(crs => crs.Department).AsNoTracking().FirstOrDefault(crs => crs.ID == id);
         }
 
         public Course AddCourse(Course NewCourse)
@@ -43,15 +72,11 @@ namespace StudentEnrollmentSystem.Repository
 
         public Course DeleteCourse(int id)
         {
-            var OldCourse = ViewOneCourse(id);
-            if(OldCourse != null)
+            var response = client.DeleteAsync(baseURL + "/course/" + id).Result;
+            if (response.IsSuccessStatusCode)
             {
-                _context.Courses.Remove(OldCourse);
-                _context.SaveChanges();
-
-                return OldCourse;
+                return _context.Courses.FirstOrDefault(crs => crs.ID == id);
             }
-
             return null;
         }
 
