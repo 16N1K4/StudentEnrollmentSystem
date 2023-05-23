@@ -4,15 +4,16 @@
 
 namespace StudentEnrollmentSystem.Migrations
 {
-    public partial class course_SP_add : Migration
+    public partial class course_SP_update : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            string storedProcedure = @"CREATE OR ALTER PROCEDURE add_course(@courseName AS NVARCHAR, @DeptID AS INT)
+            string storedProcedure = @"CREATE OR ALTER PROCEDURE update_course(@courseID AS INT, @courseName AS NVARCHAR(250), @deptID AS INT)
             AS
             BEGIN
-            INSERT INTO Courses (Name, DeptID)
-            VALUES(@courseName, @DeptID)
+            UPDATE Courses
+            SET Name = @courseName, DeptID = @deptID
+            WHERE ID = @courseID
             END";
 
             migrationBuilder.Sql(storedProcedure);
@@ -20,7 +21,7 @@ namespace StudentEnrollmentSystem.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            string storedProcedure = @"DROP PROCEDURE add_course";
+            string storedProcedure = @"DROP PROCEDURE update_course";
 
             migrationBuilder.Sql(storedProcedure);
         }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentEnrollmentSystem.Data;
 
@@ -11,9 +12,10 @@ using StudentEnrollmentSystem.Data;
 namespace StudentEnrollmentSystem.Migrations
 {
     [DbContext(typeof(SESContext))]
-    partial class SESContextModelSnapshot : ModelSnapshot
+    [Migration("20230522050801_course_SP_add")]
+    partial class course_SP_add
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,15 +56,15 @@ namespace StudentEnrollmentSystem.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9c03de93-21b0-486f-ac7e-2fdd32fd0631",
-                            ConcurrencyStamp = "efd0d1c1-3163-47bc-80ae-3c2241c75922",
+                            Id = "cc096d08-a0c0-458f-b71f-03a0db43b1bc",
+                            ConcurrencyStamp = "75e31cdd-3b9f-49ec-b871-404f6ddfe72d",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "a368eb1e-1363-483a-b9e7-c2519c36d5ef",
-                            ConcurrencyStamp = "41d86f6a-d92e-4b44-8fdf-1cc063d0b71c",
+                            Id = "b0cbd58c-011a-4859-9762-1be1073f5935",
+                            ConcurrencyStamp = "617f6179-a7b6-4c39-b494-9a73cd7b487a",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         });

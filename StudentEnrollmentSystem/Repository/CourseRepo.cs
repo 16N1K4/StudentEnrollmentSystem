@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Linq;
 using System.Net;
 using StudentEnrollmentSystem.ViewModels;
+using System.Text;
 
 namespace StudentEnrollmentSystem.Repository
 {
@@ -56,16 +57,38 @@ namespace StudentEnrollmentSystem.Repository
 
         public Course AddCourse(Course NewCourse)
         {
-            _context.Courses.Add(NewCourse);
-            _context.SaveChanges();
+            var data = JsonConvert.SerializeObject(NewCourse);
+            var content = new StringContent(data, Encoding.UTF8, "application/json");
+            var response = client.PostAsync(baseURL + "/course", content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var course = response.Content.ReadAsStringAsync().Result;
+                Course crs = JsonConvert.DeserializeObject<Course>(course);
+
+                return crs;
+            }
+            
+            /*_context.Courses.Add(NewCourse);
+            _context.SaveChanges();*/
 
             return NewCourse;
         }
 
         public Course UpdateCourse(Course NewCourse)
         {
-            _context.Courses.Update(NewCourse);
-            _context.SaveChanges();
+            var data = JsonConvert.SerializeObject(NewCourse);
+            var content = new StringContent(data, Encoding.UTF8, "application/json");
+            var response = client.PutAsync(baseURL + "/course/" + NewCourse.ID, content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var course = response.Content.ReadAsStringAsync().Result;
+                Course crs = JsonConvert.DeserializeObject<Course>(course);
+
+                return crs;
+            }
+
+            /*_context.Courses.Update(NewCourse);
+            _context.SaveChanges();*/
 
             return NewCourse;
         }
@@ -83,6 +106,11 @@ namespace StudentEnrollmentSystem.Repository
         public List<Department> FetchDepartmentList()
         {
             return _context.Departments.Where(dept => dept.ID > 0).ToList();
+        }
+
+        public Course CourseByID(int id)
+        {
+            return _context.Courses.AsNoTracking().FirstOrDefault(crs => crs.ID == id);
         }
     }
 }

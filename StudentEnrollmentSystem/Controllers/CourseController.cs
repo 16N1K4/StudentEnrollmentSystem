@@ -58,7 +58,7 @@ namespace StudentEnrollmentSystem.Controllers
         [HttpGet]
         public IActionResult UpdateCourse(int id)
         {
-            var Course = _repo.ViewOneCourse(id);
+            var Course = _repo.CourseByID(id);
             var DeptList = _repo.FetchDepartmentList();
             ViewBag.Departments = DeptList;
 

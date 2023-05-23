@@ -66,7 +66,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(
         name: MyAllowSpecificOrigins, policy =>
         {
-            policy.WithOrigins().AllowAnyHeader().AllowAnyMethod();
+            policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
         }
         );
 });
@@ -128,7 +128,7 @@ app.MapGet("api/v1/course", async (SESContext _context) =>
 
     return Results.Ok(courses);
 }
-);
+).AllowAnonymous();
 
 app.MapGet("api/v1/course/{id}", async (SESContext _context, int id) =>
 {
@@ -146,18 +146,50 @@ app.MapGet("api/v1/course/{id}", async (SESContext _context, int id) =>
 }
 );
 
-/*app.MapPost("api/v1/course", async (SESContext _context, string name, int DeptID) =>
+app.MapPost("api/v1/course", async (SESContext _context, Course crs) =>
 {
-    var course = await _context.Courses.FromSqlRaw("EXEC add_course {0}, {1}", name, DeptID).ToListAsync();
-    CourseDTO crs = new CourseDTO
+    if(crs.DeptID == null || crs.Name == null)
     {
-        ID = course.First().ID,
-        Name = course.First().Name,
-        DeptID = course.First().DeptID
+        return Results.BadRequest();
+    }
+    await _context.Database.ExecuteSqlRawAsync("EXEC add_course {0}, {1}", crs.Name, crs.DeptID);
+    await _context.SaveChangesAsync();
+
+    var courses = _context.Courses.ToList();
+    int newID = courses.MaxBy(course => course.ID).ID;
+
+    CourseDTO newCourse = new CourseDTO
+    {
+        ID = newID,
+        Name = crs.Name,
+        DeptID = crs.DeptID
+    };
+    
+    return Results.Created($"api/v1/course/{newID}", newCourse);
+});
+
+app.MapPut("api/v1/course/{id}", async (SESContext _context, int id, Course crs) =>
+{
+    if(_context.Courses.FirstOrDefault(course => course.ID == id) == null)
+    {
+        return Results.NotFound();
+    }
+    if (crs.DeptID == null || crs.Name == null)
+    {
+        return Results.BadRequest();
+    }
+    await _context.Database.ExecuteSqlRawAsync("EXEC update_course {0}, {1}, {2}", id, crs.Name, crs.DeptID);
+    await _context.SaveChangesAsync();
+
+    CourseDTO newCourse = new CourseDTO
+    {
+        ID = id,
+        Name = crs.Name,
+        DeptID = crs.DeptID
     };
 
-    return Results.Created($"api/v1/course/{course.First().ID}", crs);
-});*/
+    return Results.Ok(newCourse);
+});
 
 app.MapDelete("api/v1/course/{id}", async (SESContext _context, int id) =>
 {
@@ -165,7 +197,8 @@ app.MapDelete("api/v1/course/{id}", async (SESContext _context, int id) =>
     {
         return Results.NotFound();
     }
-    await _context.Courses.FromSqlRaw("EXEC delete_course {0}", id).ToListAsync();
+    await _context.Database.ExecuteSqlRawAsync("EXEC delete_course {0}", id);
+    await _context.SaveChangesAsync();
 
     return Results.Ok();
 });

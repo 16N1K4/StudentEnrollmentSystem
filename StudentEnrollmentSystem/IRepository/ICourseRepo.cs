@@ -11,5 +11,6 @@ namespace StudentEnrollmentSystem.IRepository
         public Course UpdateCourse(Course NewCourse);
         public Course DeleteCourse(int id);
         public List<Department> FetchDepartmentList();
+        public Course CourseByID(int id);
     }
 }

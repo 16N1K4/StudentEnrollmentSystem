@@ -12,8 +12,8 @@ using StudentEnrollmentSystem.Data;
 namespace StudentEnrollmentSystem.Migrations
 {
     [DbContext(typeof(SESContext))]
-    [Migration("20230518070116_course_SP_add")]
-    partial class course_SP_add
+    [Migration("20230522055834_course_SP_update")]
+    partial class course_SP_update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,15 +56,15 @@ namespace StudentEnrollmentSystem.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7e7c1d19-bdb7-4d67-ad9e-2b19e2f87988",
-                            ConcurrencyStamp = "e2f724f5-4c2d-41c2-922a-ee013c043aa3",
+                            Id = "9c03de93-21b0-486f-ac7e-2fdd32fd0631",
+                            ConcurrencyStamp = "efd0d1c1-3163-47bc-80ae-3c2241c75922",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "4a05f25a-6ba0-4b2b-8a12-29fcf1d25ccd",
-                            ConcurrencyStamp = "9a173a22-7379-4352-81f0-74216de8933e",
+                            Id = "a368eb1e-1363-483a-b9e7-c2519c36d5ef",
+                            ConcurrencyStamp = "41d86f6a-d92e-4b44-8fdf-1cc063d0b71c",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         });
